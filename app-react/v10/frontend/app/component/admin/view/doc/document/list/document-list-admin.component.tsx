@@ -23,34 +23,34 @@ import {DocumentAdminService} from 'app/controller/service/admin/DocumentAdminSe
 import {DocumentDto}  from 'app/controller/model/Document.model';
 import {DocumentCriteria} from 'app/controller/criteria/DocumentCriteria.model';
 
-import {FieldDto} from 'app/controller/model/Field.model';
-import {FieldAdminService} from 'app/controller/service/admin/FieldAdminService.service';
 import {UtilisateurDto} from 'app/controller/model/Utilisateur.model';
 import {UtilisateurAdminService} from 'app/controller/service/admin/UtilisateurAdminService.service';
-import {DocumentPartageUtilisateurDto} from 'app/controller/model/DocumentPartageUtilisateur.model';
-import {DocumentPartageUtilisateurAdminService} from 'app/controller/service/admin/DocumentPartageUtilisateurAdminService.service';
-import {EntiteAdministrativeDto} from 'app/controller/model/EntiteAdministrative.model';
-import {EntiteAdministrativeAdminService} from 'app/controller/service/admin/EntiteAdministrativeAdminService.service';
-import {GroupeDto} from 'app/controller/model/Groupe.model';
-import {GroupeAdminService} from 'app/controller/service/admin/GroupeAdminService.service';
-import {TagDto} from 'app/controller/model/Tag.model';
-import {TagAdminService} from 'app/controller/service/admin/TagAdminService.service';
-import {DocumentFieldStateDto} from 'app/controller/model/DocumentFieldState.model';
-import {DocumentFieldStateAdminService} from 'app/controller/service/admin/DocumentFieldStateAdminService.service';
-import {AccessShareDto} from 'app/controller/model/AccessShare.model';
-import {AccessShareAdminService} from 'app/controller/service/admin/AccessShareAdminService.service';
-import {DocumentPartageGroupeDto} from 'app/controller/model/DocumentPartageGroupe.model';
-import {DocumentPartageGroupeAdminService} from 'app/controller/service/admin/DocumentPartageGroupeAdminService.service';
-import {DocumentTagDto} from 'app/controller/model/DocumentTag.model';
-import {DocumentTagAdminService} from 'app/controller/service/admin/DocumentTagAdminService.service';
+import {FieldDto} from 'app/controller/model/Field.model';
+import {FieldAdminService} from 'app/controller/service/admin/FieldAdminService.service';
 import {DocumentTypeDto} from 'app/controller/model/DocumentType.model';
 import {DocumentTypeAdminService} from 'app/controller/service/admin/DocumentTypeAdminService.service';
-import {DocumentFieldDto} from 'app/controller/model/DocumentField.model';
-import {DocumentFieldAdminService} from 'app/controller/service/admin/DocumentFieldAdminService.service';
-import {DocumentCategorieDto} from 'app/controller/model/DocumentCategorie.model';
-import {DocumentCategorieAdminService} from 'app/controller/service/admin/DocumentCategorieAdminService.service';
 import {DocumentStateDto} from 'app/controller/model/DocumentState.model';
 import {DocumentStateAdminService} from 'app/controller/service/admin/DocumentStateAdminService.service';
+import {DocumentFieldDto} from 'app/controller/model/DocumentField.model';
+import {DocumentFieldAdminService} from 'app/controller/service/admin/DocumentFieldAdminService.service';
+import {DocumentFieldStateDto} from 'app/controller/model/DocumentFieldState.model';
+import {DocumentFieldStateAdminService} from 'app/controller/service/admin/DocumentFieldStateAdminService.service';
+import {DocumentPartageUtilisateurDto} from 'app/controller/model/DocumentPartageUtilisateur.model';
+import {DocumentPartageUtilisateurAdminService} from 'app/controller/service/admin/DocumentPartageUtilisateurAdminService.service';
+import {DocumentTagDto} from 'app/controller/model/DocumentTag.model';
+import {DocumentTagAdminService} from 'app/controller/service/admin/DocumentTagAdminService.service';
+import {DocumentCategorieDto} from 'app/controller/model/DocumentCategorie.model';
+import {DocumentCategorieAdminService} from 'app/controller/service/admin/DocumentCategorieAdminService.service';
+import {DocumentPartageGroupeDto} from 'app/controller/model/DocumentPartageGroupe.model';
+import {DocumentPartageGroupeAdminService} from 'app/controller/service/admin/DocumentPartageGroupeAdminService.service';
+import {TagDto} from 'app/controller/model/Tag.model';
+import {TagAdminService} from 'app/controller/service/admin/TagAdminService.service';
+import {EntiteAdministrativeDto} from 'app/controller/model/EntiteAdministrative.model';
+import {EntiteAdministrativeAdminService} from 'app/controller/service/admin/EntiteAdministrativeAdminService.service';
+import {AccessShareDto} from 'app/controller/model/AccessShare.model';
+import {AccessShareAdminService} from 'app/controller/service/admin/AccessShareAdminService.service';
+import {GroupeDto} from 'app/controller/model/Groupe.model';
+import {GroupeAdminService} from 'app/controller/service/admin/GroupeAdminService.service';
 
 import { useTranslation } from 'react-i18next';
 
@@ -88,13 +88,6 @@ const List = () => {
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [entiteAdministratives, setEntiteAdministratives] = useState<EntiteAdministrativeDto[]>([]);
 
-
-
-
-    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
-
-    const handleValidateClick = () => {fetchItems(criteria)};
-
     const handleCancelClick = () => {
         setCriteria(new DocumentCriteria());
         fetchItems(new DocumentCriteria());
@@ -122,8 +115,12 @@ const List = () => {
         }).catch(error => console.log(error));
     };
 
+
+    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
+    const handleValidateClick = () => {fetchItems(criteria)};
+
     const onPage = (event: PaginatorPageChangeEvent) => {
-        const updatedCriteria = { ...criteria, page: event.page,maxResults: event.rows };
+        const updatedCriteria = {...criteria, page: event.page, maxResults: event.rows};
         setCriteria(updatedCriteria);
         setFirst(event.first);
         fetchItems(updatedCriteria);
@@ -166,6 +163,14 @@ const List = () => {
     const confirmDeleteItem = (item: DocumentDto) => {
         setSelectedItem(item);
         setDeleteItemDialog(true);
+    };
+
+    const formateDate = (field: string) => {
+        return (rowData: any) => {
+                if (rowData[field]) {
+                    return format(new Date(rowData[field]), "dd/MM/yyyy");
+                }
+            };
     };
 
         const statusBodyTemplate = (val: string, style: any) => {
@@ -249,13 +254,6 @@ const List = () => {
     );
 
 
-        const formateDate = (field: string) => {
-            return (rowData: any) => {
-                if (rowData[field]) {
-                    return format(new Date(rowData[field]), "dd/MM/yyyy");
-                }
-            };
-        };
     return (
     <div className="grid crud-demo">
         <div className="col-12">
@@ -271,19 +269,19 @@ const List = () => {
                                 <label htmlFor="1">{t("documentReference")}</label>
                             </span>
                             <span className="p-float-label mr-3 align-search-items mt-4">
-                                <Calendar id="3-1" value={criteria.uploadDateFrom} onChange={(e) => setCriteria({ ...criteria, uploadDateFrom: e.value as Date })} dateFormat="dd-MM-yy" />
+                                <Calendar id="3-1" value={criteria.uploadDateFrom} onChange={(e) => setCriteria({ ...criteria, uploadDateFrom: e.value as Date })} dateFormat="dd-MM-yy" showIcon={true} />
                                 <label htmlFor="3-1">{t("documentUploadDateMin")}</label>
                             </span>
                             <span className="p-float-label mr-3 align-search-items mt-4">
-                                <Calendar id="3-2" value={criteria.uploadDateTo} onChange={(e) => setCriteria({ ...criteria, uploadDateTo: e.value as Date })} dateFormat="dd-MM-yy" />
+                                <Calendar id="3-2" value={criteria.uploadDateTo} onChange={(e) => setCriteria({ ...criteria, uploadDateTo: e.value as Date })} dateFormat="dd-MM-yy" showIcon={true} />
                                 <label htmlFor="3-2">{t("documentUploadDateMax")}</label>
                             </span>
                             <span className="p-float-label mr-3 align-search-items mt-4">
-                                <Calendar id="4-1" value={criteria.dateLastUpdateFrom} onChange={(e) => setCriteria({ ...criteria, dateLastUpdateFrom: e.value as Date })} dateFormat="dd-MM-yy" />
+                                <Calendar id="4-1" value={criteria.dateLastUpdateFrom} onChange={(e) => setCriteria({ ...criteria, dateLastUpdateFrom: e.value as Date })} dateFormat="dd-MM-yy" showIcon={true} />
                                 <label htmlFor="4-1">{t("documentDateLastUpdateMin")}</label>
                             </span>
                             <span className="p-float-label mr-3 align-search-items mt-4">
-                                <Calendar id="4-2" value={criteria.dateLastUpdateTo} onChange={(e) => setCriteria({ ...criteria, dateLastUpdateTo: e.value as Date })} dateFormat="dd-MM-yy" />
+                                <Calendar id="4-2" value={criteria.dateLastUpdateTo} onChange={(e) => setCriteria({ ...criteria, dateLastUpdateTo: e.value as Date })} dateFormat="dd-MM-yy" showIcon={true} />
                                 <label htmlFor="4-2">{t("documentDateLastUpdateMax")}</label>
                             </span>
                             <span className="p-float-label mr-3 align-search-items mt-4">

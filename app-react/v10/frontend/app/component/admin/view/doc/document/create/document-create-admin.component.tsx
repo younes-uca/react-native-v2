@@ -11,45 +11,44 @@ import React, {useEffect, useState} from 'react';
 import {Calendar, CalendarChangeEvent} from 'primereact/calendar';
 import { format } from 'date-fns';
 import {InputSwitch, InputSwitchChangeEvent} from 'primereact/inputswitch';
-import {MultiSelect, MultiSelectChangeEvent} from 'primereact/multiselect';
 import {Dropdown, DropdownChangeEvent} from 'primereact/dropdown';
 import { FileUpload, FileUploadHandlerEvent } from 'primereact/fileupload';
-
 import {MessageService} from 'app/zynerator/service/MessageService';
 
 import {DocumentAdminService} from 'app/controller/service/admin/DocumentAdminService.service';
 import  {DocumentDto}  from 'app/controller/model/Document.model';
 
-import {FieldDto} from 'app/controller/model/Field.model';
-import {FieldAdminService} from 'app/controller/service/admin/FieldAdminService.service';
 import {UtilisateurDto} from 'app/controller/model/Utilisateur.model';
 import {UtilisateurAdminService} from 'app/controller/service/admin/UtilisateurAdminService.service';
-import {DocumentPartageUtilisateurDto} from 'app/controller/model/DocumentPartageUtilisateur.model';
-import {DocumentPartageUtilisateurAdminService} from 'app/controller/service/admin/DocumentPartageUtilisateurAdminService.service';
-import {EntiteAdministrativeDto} from 'app/controller/model/EntiteAdministrative.model';
-import {EntiteAdministrativeAdminService} from 'app/controller/service/admin/EntiteAdministrativeAdminService.service';
-import {GroupeDto} from 'app/controller/model/Groupe.model';
-import {GroupeAdminService} from 'app/controller/service/admin/GroupeAdminService.service';
-import {TagDto} from 'app/controller/model/Tag.model';
-import {TagAdminService} from 'app/controller/service/admin/TagAdminService.service';
-import {DocumentFieldStateDto} from 'app/controller/model/DocumentFieldState.model';
-import {DocumentFieldStateAdminService} from 'app/controller/service/admin/DocumentFieldStateAdminService.service';
-import {AccessShareDto} from 'app/controller/model/AccessShare.model';
-import {AccessShareAdminService} from 'app/controller/service/admin/AccessShareAdminService.service';
-import {DocumentPartageGroupeDto} from 'app/controller/model/DocumentPartageGroupe.model';
-import {DocumentPartageGroupeAdminService} from 'app/controller/service/admin/DocumentPartageGroupeAdminService.service';
-import {DocumentTagDto} from 'app/controller/model/DocumentTag.model';
-import {DocumentTagAdminService} from 'app/controller/service/admin/DocumentTagAdminService.service';
+import {FieldDto} from 'app/controller/model/Field.model';
+import {FieldAdminService} from 'app/controller/service/admin/FieldAdminService.service';
 import {DocumentTypeDto} from 'app/controller/model/DocumentType.model';
 import {DocumentTypeAdminService} from 'app/controller/service/admin/DocumentTypeAdminService.service';
-import {DocumentFieldDto} from 'app/controller/model/DocumentField.model';
-import {DocumentFieldAdminService} from 'app/controller/service/admin/DocumentFieldAdminService.service';
-import {DocumentCategorieDto} from 'app/controller/model/DocumentCategorie.model';
-import {DocumentCategorieAdminService} from 'app/controller/service/admin/DocumentCategorieAdminService.service';
 import {DocumentStateDto} from 'app/controller/model/DocumentState.model';
 import {DocumentStateAdminService} from 'app/controller/service/admin/DocumentStateAdminService.service';
+import {DocumentFieldDto} from 'app/controller/model/DocumentField.model';
+import {DocumentFieldAdminService} from 'app/controller/service/admin/DocumentFieldAdminService.service';
+import {DocumentFieldStateDto} from 'app/controller/model/DocumentFieldState.model';
+import {DocumentFieldStateAdminService} from 'app/controller/service/admin/DocumentFieldStateAdminService.service';
+import {DocumentPartageUtilisateurDto} from 'app/controller/model/DocumentPartageUtilisateur.model';
+import {DocumentPartageUtilisateurAdminService} from 'app/controller/service/admin/DocumentPartageUtilisateurAdminService.service';
+import {DocumentTagDto} from 'app/controller/model/DocumentTag.model';
+import {DocumentTagAdminService} from 'app/controller/service/admin/DocumentTagAdminService.service';
+import {DocumentCategorieDto} from 'app/controller/model/DocumentCategorie.model';
+import {DocumentCategorieAdminService} from 'app/controller/service/admin/DocumentCategorieAdminService.service';
+import {DocumentPartageGroupeDto} from 'app/controller/model/DocumentPartageGroupe.model';
+import {DocumentPartageGroupeAdminService} from 'app/controller/service/admin/DocumentPartageGroupeAdminService.service';
+import {TagDto} from 'app/controller/model/Tag.model';
+import {TagAdminService} from 'app/controller/service/admin/TagAdminService.service';
+import {EntiteAdministrativeDto} from 'app/controller/model/EntiteAdministrative.model';
+import {EntiteAdministrativeAdminService} from 'app/controller/service/admin/EntiteAdministrativeAdminService.service';
+import {AccessShareDto} from 'app/controller/model/AccessShare.model';
+import {AccessShareAdminService} from 'app/controller/service/admin/AccessShareAdminService.service';
+import {GroupeDto} from 'app/controller/model/Groupe.model';
+import {GroupeAdminService} from 'app/controller/service/admin/GroupeAdminService.service';
 import {TFunction} from "i18next";
 import {Toast} from "primereact/toast";
+import {MultiSelect, MultiSelectChangeEvent} from 'primereact/multiselect';
 
 type DocumentCreateAdminType = {
     visible: boolean,
@@ -68,6 +67,7 @@ const Create: React.FC<DocumentCreateAdminType> = ({visible, onClose, add, showT
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [activeTab, setActiveTab] = useState(0);
 
+
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [entiteAdministratives, setEntiteAdministratives] = useState<EntiteAdministrativeDto[]>([]);
     const [groupes, setGroupes] = useState<GroupeDto[]>([]);
@@ -82,39 +82,37 @@ const Create: React.FC<DocumentCreateAdminType> = ({visible, onClose, add, showT
     const [documentFields, setDocumentFields] = useState<DocumentFieldDto>(new DocumentFieldDto());
     const [documentPartageGroupes, setDocumentPartageGroupes] = useState<DocumentPartageGroupeDto>(new DocumentPartageGroupeDto());
     const [documentPartageUtilisateurs, setDocumentPartageUtilisateurs] = useState<DocumentPartageUtilisateurDto>(new DocumentPartageUtilisateurDto());
-    const [documentTags, setDocumentTags] = useState<DocumentTagDto[]>(new Array<DocumentTagDto>());
+    const [documentTags, setDocumentTags] = useState<DocumentTagDto>(new DocumentTagDto());
 
     useEffect(() => {
 
+        DocumentTypeAdminService.getList().then(({data}) => setDocumentTypes(data)).catch(error => console.log(error));
+        DocumentStateAdminService.getList().then(({data}) => setDocumentStates(data)).catch(error => console.log(error));
+        DocumentCategorieAdminService.getList().then(({data}) => setDocumentCategories(data)).catch(error => console.log(error));
         UtilisateurAdminService.getList().then(({data}) => setUtilisateurs(data)).catch(error => console.log(error));
         EntiteAdministrativeAdminService.getList().then(({data}) => setEntiteAdministratives(data)).catch(error => console.log(error));
-        GroupeAdminService.getList().then(({data}) => setGroupes(data)).catch(error => console.log(error));
-        FieldAdminService.getList().then(({data}) => setFields(data)).catch(error => console.log(error));
-        DocumentFieldStateAdminService.getList().then(({data}) => setDocumentFieldStates(data)).catch(error => console.log(error));
-        DocumentTypeAdminService.getList().then(({data}) => setDocumentTypes(data)).catch(error => console.log(error));
-        AccessShareAdminService.getList().then(({data}) => setAccessShares(data)).catch(error => console.log(error));
-        TagAdminService.getList().then(({data}) => setTags(data)).catch(error => console.log(error));
-        DocumentCategorieAdminService.getList().then(({data}) => setDocumentCategories(data)).catch(error => console.log(error));
-        DocumentStateAdminService.getList().then(({data}) => setDocumentStates(data)).catch(error => console.log(error));
 
 
         FieldAdminService.getList().then(({data}) => setFields(data)).catch(error => console.log(error));
         DocumentFieldStateAdminService.getList().then(({data}) => setDocumentFieldStates(data)).catch(error => console.log(error));
 
 
+
         GroupeAdminService.getList().then(({data}) => setGroupes(data)).catch(error => console.log(error));
         AccessShareAdminService.getList().then(({data}) => setAccessShares(data)).catch(error => console.log(error));
+
 
 
         UtilisateurAdminService.getList().then(({data}) => setUtilisateurs(data)).catch(error => console.log(error));
         AccessShareAdminService.getList().then(({data}) => setAccessShares(data)).catch(error => console.log(error));
+
 
         TagAdminService.getList().then(({data}) => {
             const DocumentTags = data?.map(prepareDocumentTag)
             setDocumentTags(documentTags)
         })
 
-        TagAdminService.getList().then(({data}) => setTags(data)).catch(error => console.log(error));
+
 
     }, []);
 
@@ -125,10 +123,6 @@ const Create: React.FC<DocumentCreateAdminType> = ({visible, onClose, add, showT
         return documentTag;
     }
 
-
-    const onDropdownChange = (e: DropdownChangeEvent, field: string) => {
-        setItem((prevState) => ({ ...prevState, [field]: e.value}));
-    };
 
     const addDocumentFields = () => {
         setSubmitted(true);
@@ -293,7 +287,40 @@ const Create: React.FC<DocumentCreateAdminType> = ({visible, onClose, add, showT
             }
         };
     };
-    const onTabChange = (e: { index: number }) => { setActiveIndex(e.index); };
+
+    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const value = (e.target && e.target.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
+        const value = (e.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
+        const val = e.value === null ? null : +e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
+    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
+        if (e && e.value) {
+            setItem(prevState => ({...prevState, [field]: e.value,}));
+        }
+    };
+
+    const onBooleanInputChange = (e: any, name: string) => {
+        const val = e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+        };
+
+    const onDropdownChange = (e: DropdownChangeEvent, field: string) => {
+        setItem((prevState) => ({...prevState, [field]: e.value}));
+    };
+
+    const onTabChange = (e: { index: number }) => {
+        setActiveIndex(e.index);
+    };
 
     const hideDialog = () => {
         setSubmitted(false);
@@ -317,32 +344,6 @@ const Create: React.FC<DocumentCreateAdminType> = ({visible, onClose, add, showT
                 setSubmitted(false);
                 });
         }
-    };
-
-    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const value = (e.target && e.target.value) || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
-        const value = (e.value) || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
-        const val = e.value === null ? null : +e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
-
-    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
-        if (e && e.value) {
-            setItem(prevState => ({...prevState, [field]: e.value,}));
-        }
-    };
-
-    const onBooleanInputChange = (e: any, name: string) => {
-       const val = e.value;
-       setItem((prevItem) => ({ ...prevItem, [name]: val, }));
     };
 
     const itemDialogFooter = ( <>
@@ -433,7 +434,9 @@ return(
                     </div>
                     <div className="field col-6">
                         <label htmlFor="documentTags">{t("documentTagTag")}</label>
+                       {/*
                         <MultiSelect value={item.documentTags} options={documentTags}  optionLabel="tag.libelle" display="chip" placeholder={t("documentDocumentTagsPlaceHolder")}  maxSelectedLabels={3}  onChange={(e) => onMultiSelectChange(e, 'documentTags')} />
+                    */}
                     </div>
                 </div>
             </TabPanel>

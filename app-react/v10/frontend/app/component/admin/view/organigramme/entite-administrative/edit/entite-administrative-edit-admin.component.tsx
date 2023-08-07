@@ -40,18 +40,18 @@ const Edit: React.FC<EntiteAdministrativeEditAdminType> = ({visible, onClose, sh
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [activeTab, setActiveTab] = useState(0);
     const [item, setItem] = useState<EntiteAdministrativeDto>(selectedItem);
+
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [entiteAdministrativeTypes, setEntiteAdministrativeTypes] = useState<EntiteAdministrativeTypeDto[]>([]);
 
 
+        useEffect(() => {
 
+    UtilisateurAdminService.getList().then(({data}) => setUtilisateurs(data)).catch(error => console.log(error));
+    EntiteAdministrativeTypeAdminService.getList().then(({data}) => setEntiteAdministrativeTypes(data)).catch(error => console.log(error));
 
-    useEffect(() => {
+        }, []);
 
-        UtilisateurAdminService.getList().then(({data}) => setUtilisateurs(data)).catch(error => console.log(error));
-        EntiteAdministrativeTypeAdminService.getList().then(({data}) => setEntiteAdministrativeTypes(data)).catch(error => console.log(error));
-
-    }, []);
 
 
 
@@ -62,6 +62,33 @@ const Edit: React.FC<EntiteAdministrativeEditAdminType> = ({visible, onClose, sh
     };
 
 
+
+    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const value = (e.target && e.target.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
+        const value = (e.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
+        const val = e.value === null ? null : +e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
+    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
+        if (e && e.value) {
+            setItem(prevState => ({...prevState, [field]: e.value,}));
+        }
+    };
+
+    const onBooleanInputChange = (e: any, name: string) => {
+        const val = e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
     const onTabChange = (e: { index: number }) => {
         setActiveIndex(e.index);
     };
@@ -70,6 +97,7 @@ const Edit: React.FC<EntiteAdministrativeEditAdminType> = ({visible, onClose, sh
         setSubmitted(false);
         onClose();
     };
+
 
     const isFormValid = () => {
         let errorMessages = new Array<string>();
@@ -89,32 +117,6 @@ const Edit: React.FC<EntiteAdministrativeEditAdminType> = ({visible, onClose, sh
             setSubmitted(false);
     }
 };
-
-    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const value = (e.target && e.target.value) || '';
-        setItem({ ...item, [name]: value });
-        };
-    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
-        const value = e.value || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
-        const val = e.value === null ? null : +e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
-
-    const onMultiSelectChange = (e: any, field: string) => {
-        if (e && e.value && Array.isArray(e.value)) {
-            const selectedValues = e.value.map(option => option && option.value);
-            setItem(prevState => ({ ...prevState, [field]: selectedValues, }));
-        }
-    };
-
-    const onBooleanInputChange = (e: any, name: string) => {
-        const val = e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
 
     const itemDialogFooter = ( <>
         <Button label="Cancel" icon="pi pi-times" text onClick={hideDialog} />

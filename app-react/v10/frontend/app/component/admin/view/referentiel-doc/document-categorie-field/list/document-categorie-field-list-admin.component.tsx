@@ -24,10 +24,10 @@ import {DocumentCategorieFieldCriteria} from 'app/controller/criteria/DocumentCa
 
 import {FieldDto} from 'app/controller/model/Field.model';
 import {FieldAdminService} from 'app/controller/service/admin/FieldAdminService.service';
-import {DocumentCategorieFieldRuleDto} from 'app/controller/model/DocumentCategorieFieldRule.model';
-import {DocumentCategorieFieldRuleAdminService} from 'app/controller/service/admin/DocumentCategorieFieldRuleAdminService.service';
 import {DocumentCategorieDto} from 'app/controller/model/DocumentCategorie.model';
 import {DocumentCategorieAdminService} from 'app/controller/service/admin/DocumentCategorieAdminService.service';
+import {DocumentCategorieFieldRuleDto} from 'app/controller/model/DocumentCategorieFieldRule.model';
+import {DocumentCategorieFieldRuleAdminService} from 'app/controller/service/admin/DocumentCategorieFieldRuleAdminService.service';
 
 import { useTranslation } from 'react-i18next';
 
@@ -63,13 +63,6 @@ const List = () => {
     const [documentCategories, setDocumentCategories] = useState<DocumentCategorieDto[]>([]);
     const [documentCategorieFieldRules, setDocumentCategorieFieldRules] = useState<DocumentCategorieFieldRuleDto[]>([]);
 
-
-
-
-    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
-
-    const handleValidateClick = () => {fetchItems(criteria)};
-
     const handleCancelClick = () => {
         setCriteria(new DocumentCategorieFieldCriteria());
         fetchItems(new DocumentCategorieFieldCriteria());
@@ -95,8 +88,12 @@ const List = () => {
         }).catch(error => console.log(error));
     };
 
+
+    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
+    const handleValidateClick = () => {fetchItems(criteria)};
+
     const onPage = (event: PaginatorPageChangeEvent) => {
-        const updatedCriteria = { ...criteria, page: event.page,maxResults: event.rows };
+        const updatedCriteria = {...criteria, page: event.page, maxResults: event.rows};
         setCriteria(updatedCriteria);
         setFirst(event.first);
         fetchItems(updatedCriteria);
@@ -140,6 +137,7 @@ const List = () => {
         setSelectedItem(item);
         setDeleteItemDialog(true);
     };
+
 
 
     const deleteItem = async () => {

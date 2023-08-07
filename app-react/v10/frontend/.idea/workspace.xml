@@ -4,10 +4,239 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b15cbd7-2991-4ff7-9111-fefef597ab24" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" afterDir="false" />
+    <list default="true" id="7e82ec37-3b46-499f-be30-e3f9adecac17" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../ged-minio-master/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/zyhooks/useCreate.hook.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/zyhooks/useEdit.hook.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/zyhooks/useListhook.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/zyhooks/useViewhook.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v10/frontend/app/zynerator/service/AbstractService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/layout/i18n.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v8-backup/frontend/.idea/frontend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../v9/frontend/.idea/frontend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/GedApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/config/MinioConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/config/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/service/facade/admin/MinIOService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/service/impl/admin/MinIOServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/ws/facade/admin/MinioController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/audit/AuditBusinessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/audit/AuditBusinessObjectEnhanced.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/audit/AuditEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/audit/EntityListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/audit/Log.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/bean/BaseEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/bean/BusinessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/bean/EntityIdResolver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/bean/EnumBean.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/bean/Etablissement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/config/JacksonConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/config/UploadConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/controller/AbstractController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/controller/BaseController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/controller/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/converter/AbstractConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/converter/AbstractConverterEnhanced.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/criteria/BaseCriteria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/criteria/BaseCriteriaEnhanced.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/criteria/CodeCriteria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/criteria/CodeLibelleCriteria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/criteria/CodeLibelleDescCriteria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/AuditBaseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/AuditBaseDtoEnhanced.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/AuditEntityDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/BaseDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/BusinessDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/EtablissementDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/dto/FileTempDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/enumeration/ACTION_TYPE.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/enumeration/BIRT_EXPORT_FORMAT.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/enumeration/PRAMAMETRE_TYPE.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/enumeration/STATUT_PROTOCOLEINCLUSION.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/enumeration/TYPE_VALEUR.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/BusinessRuleException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/EntityAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/EntityNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/GlobalException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/JwtTokenMalformedException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/JwtTokenMissingException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/exception/TimeoutException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/export/ColumnModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/export/ExportModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/export/PdfConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/export/ReportBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/history/HistBusinessObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/history/HistCriteria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/AbstractProcess.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/AbstractProcessConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/AbstractProcessImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/AbstractProcessInput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/AbstractProcessOutput.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/LocaleConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/Message.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/MessageType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/Result.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/process/Translator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/repository/AbstractHistoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/repository/AbstractRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/required/AbstractRequired.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/bean/Permission.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/bean/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/bean/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/common/AuthoritiesConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/common/SecurityParams.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/common/SecurityUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/config/WebSecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/dao/PermissionDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/dao/RoleDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/helper/AuthenticationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/helper/AuthenticationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/helper/Token.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/jwt/JWTAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/jwt/JWTAuthorizationFiler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/facade/PermissionService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/facade/RoleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/facade/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/impl/PermissionServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/impl/RoleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/ws/RoleRest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/security/ws/UserRest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/service/AbstractReferentielServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/service/AbstractServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/service/AbstractServiceImplHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/service/Attribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/service/IService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/specification/AbstractHistorySpecification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/specification/AbstractSpecification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/specification/AbstractSpecificationEnhanced.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/specification/SpecificationHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/AuditEntityUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/BirtMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/BirtWarpper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/BooleanUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/BusinessObjectUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/DateUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/DtoUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/ExportUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/FileUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/FrenchNumberToWords.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/ListUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/LocalDateTimeDeserializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/LocalDateTimeSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/MD5Checksum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/MyDate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/NumberUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/PaginatedList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/PropertiesException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/RefelexivityUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/StringUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/TranslateUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/TreeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/UniqueID.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/UserUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/Utils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/java/ma/sir/ged/zynerator/util/VelocityPdf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-origin.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-postgres.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-test.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application-zouani.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/db/migration/V1__init.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/deploy/docker-compose/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/deploy/docker-compose/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/fonts/arial.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/fonts/tahoma.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/loging/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/loging/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/loging/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/loging/logstash/config/logstash.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/loging/logstash/pipeline/logstash.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/data/prometheus/config/prometheus.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/grafana-template.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/grafana/alerting/1/__default__.tmpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/monotoring/grafana/grafana.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/AcessManagement.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/AcessShare.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/Document.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentAcessShare.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentManagementGroupe.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentManagementUtilisateur.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentPartageGroupe.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentPartageUtilisateur.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentTag.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/DocumentType.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/EntiteAdministrative.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/Groupe.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/GroupeUtilisateur.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/Tag.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../minio/src/main/resources/template/Utilisateur.vm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/edit/document-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/edit/document-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/list/document-list-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/list/document-list-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/view/document-view-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/doc/document/view/document-view-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative-type/edit/entite-administrative-type-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative-type/edit/entite-administrative-type-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/create/entite-administrative-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/create/entite-administrative-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/edit/entite-administrative-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/edit/entite-administrative-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/list/entite-administrative-list-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/list/entite-administrative-list-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/view/entite-administrative-view-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/entite-administrative/view/entite-administrative-view-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/utilisateur/edit/utilisateur-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/organigramme/utilisateur/edit/utilisateur-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field-rule/edit/document-categorie-field-rule-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field-rule/edit/document-categorie-field-rule-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/create/document-categorie-field-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/create/document-categorie-field-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/edit/document-categorie-field-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/edit/document-categorie-field-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/list/document-categorie-field-list-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie-field/list/document-categorie-field-list-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie/create/document-categorie-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie/create/document-categorie-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie/edit/document-categorie-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-categorie/edit/document-categorie-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-field-state/edit/document-field-state-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-field-state/edit/document-field-state-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-state/create/document-state-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-state/create/document-state-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-state/edit/document-state-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-state/edit/document-state-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-type/edit/document-type-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/document-type/edit/document-type-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/field/edit/field-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/field/edit/field-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/tag/edit/tag-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-doc/tag/edit/tag-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/access-share/edit/access-share-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/access-share/edit/access-share-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/etat-utilisateur/edit/etat-utilisateur-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/etat-utilisateur/edit/etat-utilisateur-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/create/groupe-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/create/groupe-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/edit/groupe-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/edit/groupe-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/list/groupe-list-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/groupe/list/groupe-list-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/role-utilisateur/edit/role-utilisateur-edit-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/admin/view/referentiel-partage/role-utilisateur/edit/role-utilisateur-edit-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field-rule/edit/document-categorie-field-rule-edit-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field-rule/edit/document-categorie-field-rule-edit-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/create/document-categorie-field-create-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/create/document-categorie-field-create-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/edit/document-categorie-field-edit-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/edit/document-categorie-field-edit-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/list/document-categorie-field-list-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie-field/list/document-categorie-field-list-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie/create/document-categorie-create-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie/create/document-categorie-create-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie/edit/document-categorie-edit-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/document-categorie/edit/document-categorie-edit-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/field/edit/field-edit-agent.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/component/agent/view/referentiel-doc/field/edit/field-edit-agent.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/app/controller/service/admin/DocumentAdminService.service.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/app/controller/service/admin/DocumentAdminService.service.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v10/frontend/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v10/frontend/pages/_document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v8/backend-ms1/src/main/java/ma/sir/ged/GedApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../v8/backend-ms1/src/main/java/ma/sir/ged/GedApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v8/frontend/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v8/frontend/app/component/admin/view/doc/document/create/document-create-admin.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v8/frontend/app/controller/model/GroupeUtilisateur.model.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v8/frontend/app/controller/model/GroupeUtilisateur.model.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v8/frontend/layout/AppMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../v8/frontend/layout/AppMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v9/backend-ms1/src/main/java/ma/sir/ged/ws/facade/open/TranslationWs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../v9/backend-ms1/src/main/java/ma/sir/ged/ws/facade/open/TranslationWs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v9/backend-ms1/src/main/resources/locales/en/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../v9/backend-ms1/src/main/resources/locales/en/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../v9/frontend/layout/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../v9/frontend/layout/i18n.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,12 +244,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2TcaluAHHmJxjzbsQhWRv4dnDJv" />
+  <component name="ProjectId" id="2TeRV6hTW3kOmeCk2oqY8dL1TTa" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -29,32 +258,32 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/HP/Desktop/react-native-v2/react-native-v2/app-react/v10/frontend",
+    "last_opened_file_path": "C:/Users/HP/generated/ged/ged/v11/frontend/layout",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\HP\\Desktop\\react-native-v2\\react-native-v2\\app-react\\v10\\frontend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\HP\generated\1691322979996\frontend\layout" />
+      <recent name="C:\Users\HP\generated\ged\ged\v11\frontend\layout" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1b15cbd7-2991-4ff7-9111-fefef597ab24" name="Changes" comment="" />
-      <created>1691344976580</created>
+      <changelist id="7e82ec37-3b46-499f-be30-e3f9adecac17" name="Changes" comment="" />
+      <created>1691401580717</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1691344976580</updated>
-      <workItem from="1691344977621" duration="569000" />
-      <workItem from="1691403749018" duration="28000" />
+      <updated>1691401580717</updated>
+      <workItem from="1691401581745" duration="1870000" />
     </task>
     <servers />
   </component>

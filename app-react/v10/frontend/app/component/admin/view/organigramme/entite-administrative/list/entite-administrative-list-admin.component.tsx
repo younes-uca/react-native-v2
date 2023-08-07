@@ -60,13 +60,6 @@ const List = () => {
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [entiteAdministrativeTypes, setEntiteAdministrativeTypes] = useState<EntiteAdministrativeTypeDto[]>([]);
 
-
-
-
-    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
-
-    const handleValidateClick = () => {fetchItems(criteria)};
-
     const handleCancelClick = () => {
         setCriteria(new EntiteAdministrativeCriteria());
         fetchItems(new EntiteAdministrativeCriteria());
@@ -91,8 +84,12 @@ const List = () => {
         }).catch(error => console.log(error));
     };
 
+
+    const showSearch = () => { setFindByCriteriaShow(!findByCriteriaShow); };
+    const handleValidateClick = () => {fetchItems(criteria)};
+
     const onPage = (event: PaginatorPageChangeEvent) => {
-        const updatedCriteria = { ...criteria, page: event.page,maxResults: event.rows };
+        const updatedCriteria = {...criteria, page: event.page, maxResults: event.rows};
         setCriteria(updatedCriteria);
         setFirst(event.first);
         fetchItems(updatedCriteria);
@@ -136,6 +133,7 @@ const List = () => {
         setSelectedItem(item);
         setDeleteItemDialog(true);
     };
+
 
 
     const deleteItem = async () => {

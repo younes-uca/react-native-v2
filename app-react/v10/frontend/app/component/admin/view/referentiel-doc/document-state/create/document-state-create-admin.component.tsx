@@ -10,9 +10,7 @@ import React, {useEffect, useState} from 'react';
 import {Calendar, CalendarChangeEvent} from 'primereact/calendar';
 import { format } from 'date-fns';
 import {InputSwitch, InputSwitchChangeEvent} from 'primereact/inputswitch';
-import {MultiSelect, MultiSelectChangeEvent} from 'primereact/multiselect';
 import {Dropdown, DropdownChangeEvent} from 'primereact/dropdown';
-
 import {MessageService} from 'app/zynerator/service/MessageService';
 
 import {DocumentStateAdminService} from 'app/controller/service/admin/DocumentStateAdminService.service';
@@ -40,6 +38,7 @@ const Create: React.FC<DocumentStateCreateAdminType> = ({visible, onClose, add, 
 
 
 
+
     useEffect(() => {
 
 
@@ -48,11 +47,40 @@ const Create: React.FC<DocumentStateCreateAdminType> = ({visible, onClose, add, 
 
 
 
-    const onDropdownChange = (e: DropdownChangeEvent, field: string) => {
-        setItem((prevState) => ({ ...prevState, [field]: e.value}));
+
+    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const value = (e.target && e.target.value) || '';
+        setItem({...item, [name]: value});
     };
 
-    const onTabChange = (e: { index: number }) => { setActiveIndex(e.index); };
+    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
+        const value = (e.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
+        const val = e.value === null ? null : +e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
+    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
+        if (e && e.value) {
+            setItem(prevState => ({...prevState, [field]: e.value,}));
+        }
+    };
+
+    const onBooleanInputChange = (e: any, name: string) => {
+        const val = e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+        };
+
+    const onDropdownChange = (e: DropdownChangeEvent, field: string) => {
+        setItem((prevState) => ({...prevState, [field]: e.value}));
+    };
+
+    const onTabChange = (e: { index: number }) => {
+        setActiveIndex(e.index);
+    };
 
     const hideDialog = () => {
         setSubmitted(false);
@@ -78,32 +106,6 @@ const Create: React.FC<DocumentStateCreateAdminType> = ({visible, onClose, add, 
                 setSubmitted(false);
                 });
         }
-    };
-
-    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const value = (e.target && e.target.value) || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
-        const value = (e.value) || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
-        const val = e.value === null ? null : +e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
-
-    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
-        if (e && e.value) {
-            setItem(prevState => ({...prevState, [field]: e.value,}));
-        }
-    };
-
-    const onBooleanInputChange = (e: any, name: string) => {
-       const val = e.value;
-       setItem((prevItem) => ({ ...prevItem, [name]: val, }));
     };
 
     const itemDialogFooter = ( <>

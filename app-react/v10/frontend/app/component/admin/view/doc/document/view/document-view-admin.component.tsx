@@ -14,7 +14,7 @@ import {Calendar, CalendarChangeEvent} from 'primereact/calendar';
 import { format } from 'date-fns';
 import { parse } from 'date-fns';
 import { InputSwitch } from 'primereact/inputswitch';
-import {MultiSelect} from 'primereact/multiselect';
+import {MultiSelect, MultiSelectChangeEvent} from 'primereact/multiselect';
 import  {DocumentDto}  from 'app/controller/model/Document.model';
 import {TFunction} from "i18next";
 
@@ -73,7 +73,7 @@ return(
 
                 <div className="field col-6">
                     <label htmlFor="referenceGed">{t("documentReferenceGed")}</label>
-                    <InputNumber id="referenceGed" value={item.referenceGed} disabled/>
+                    <InputNumber id="referenceGed" value={selectedItem.referenceGed} disabled/>
                 </div>
 
         <div className="field col-6">
@@ -102,7 +102,7 @@ return(
 
                 <div className="field col-6">
                     <label htmlFor="size">{t("documentSize")}</label>
-                    <InputNumber id="size" value={item.size} disabled/>
+                    <InputNumber id="size" value={selectedItem.size} disabled/>
                 </div>
 
                 <div className="field col-6">

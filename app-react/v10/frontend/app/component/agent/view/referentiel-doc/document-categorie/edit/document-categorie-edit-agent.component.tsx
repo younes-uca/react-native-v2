@@ -22,12 +22,12 @@ import  {DocumentCategorieDto}  from 'app/controller/model/DocumentCategorie.mod
 import {TFunction} from "i18next";
 import {Toast} from "primereact/toast";
 
+import {DocumentCategorieFieldDto} from 'app/controller/model/DocumentCategorieField.model';
+import {DocumentCategorieFieldAgentService} from 'app/controller/service/agent/DocumentCategorieFieldAgentService.service';
 import {FieldDto} from 'app/controller/model/Field.model';
 import {FieldAgentService} from 'app/controller/service/agent/FieldAgentService.service';
 import {DocumentCategorieFieldRuleDto} from 'app/controller/model/DocumentCategorieFieldRule.model';
 import {DocumentCategorieFieldRuleAgentService} from 'app/controller/service/agent/DocumentCategorieFieldRuleAgentService.service';
-import {DocumentCategorieFieldDto} from 'app/controller/model/DocumentCategorieField.model';
-import {DocumentCategorieFieldAgentService} from 'app/controller/service/agent/DocumentCategorieFieldAgentService.service';
 type DocumentCategorieEditAgentType = {
     visible: boolean,
     onClose: () => void,
@@ -43,23 +43,20 @@ const Edit: React.FC<DocumentCategorieEditAgentType> = ({visible, onClose, showT
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [activeTab, setActiveTab] = useState(0);
     const [item, setItem] = useState<DocumentCategorieDto>(selectedItem);
+
     const [fields, setFields] = useState<FieldDto[]>([]);
     const [documentCategorieFieldRules, setDocumentCategorieFieldRules] = useState<DocumentCategorieFieldRuleDto[]>([]);
 
-
     const [documentCategorieFields, setDocumentCategorieFields] = useState<DocumentCategorieFieldDto>(new DocumentCategorieFieldDto());
 
-
-    useEffect(() => {
-
-        FieldAgentService.getList().then(({data}) => setFields(data)).catch(error => console.log(error));
-        DocumentCategorieFieldRuleAgentService.getList().then(({data}) => setDocumentCategorieFieldRules(data)).catch(error => console.log(error));
+        useEffect(() => {
 
 
-        FieldAgentService.getList().then(({data}) => setFields(data)).catch(error => console.log(error));
-        DocumentCategorieFieldRuleAgentService.getList().then(({data}) => setDocumentCategorieFieldRules(data)).catch(error => console.log(error));
 
-    }, []);
+    FieldAgentService.getList().then(({data}) => setFields(data)).catch(error => console.log(error));
+    DocumentCategorieFieldRuleAgentService.getList().then(({data}) => setDocumentCategorieFieldRules(data)).catch(error => console.log(error));
+        }, []);
+
 
 
 
@@ -130,6 +127,33 @@ const Edit: React.FC<DocumentCategorieEditAgentType> = ({visible, onClose, showT
         setDocumentCategorieFields({ ...documentCategorieFields, [name]:val})
     };
 
+
+    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const value = (e.target && e.target.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
+        const value = (e.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
+        const val = e.value === null ? null : +e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
+    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
+        if (e && e.value) {
+            setItem(prevState => ({...prevState, [field]: e.value,}));
+        }
+    };
+
+    const onBooleanInputChange = (e: any, name: string) => {
+        const val = e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
     const onTabChange = (e: { index: number }) => {
         setActiveIndex(e.index);
     };
@@ -138,6 +162,7 @@ const Edit: React.FC<DocumentCategorieEditAgentType> = ({visible, onClose, showT
         setSubmitted(false);
         onClose();
     };
+
 
     const isFormValid = () => {
         let errorMessages = new Array<string>();
@@ -157,32 +182,6 @@ const Edit: React.FC<DocumentCategorieEditAgentType> = ({visible, onClose, showT
             setSubmitted(false);
     }
 };
-
-    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const value = (e.target && e.target.value) || '';
-        setItem({ ...item, [name]: value });
-        };
-    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
-        const value = e.value || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
-        const val = e.value === null ? null : +e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
-
-    const onMultiSelectChange = (e: any, field: string) => {
-        if (e && e.value && Array.isArray(e.value)) {
-            const selectedValues = e.value.map(option => option && option.value);
-            setItem(prevState => ({ ...prevState, [field]: selectedValues, }));
-        }
-    };
-
-    const onBooleanInputChange = (e: any, name: string) => {
-        const val = e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
 
     const itemDialogFooter = ( <>
         <Button label="Cancel" icon="pi pi-times" text onClick={hideDialog} />

@@ -39,11 +39,11 @@ const Edit: React.FC<DocumentCategorieFieldRuleEditAgentType> = ({visible, onClo
 
 
 
+        useEffect(() => {
 
-    useEffect(() => {
 
+        }, []);
 
-    }, []);
 
 
 
@@ -54,6 +54,33 @@ const Edit: React.FC<DocumentCategorieFieldRuleEditAgentType> = ({visible, onClo
     };
 
 
+
+    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const value = (e.target && e.target.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
+        const value = (e.value) || '';
+        setItem({...item, [name]: value});
+    };
+
+    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
+        const val = e.value === null ? null : +e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
+    const onMultiSelectChange = (e: MultiSelectChangeEvent, field: string) => {
+        if (e && e.value) {
+            setItem(prevState => ({...prevState, [field]: e.value,}));
+        }
+    };
+
+    const onBooleanInputChange = (e: any, name: string) => {
+        const val = e.value;
+        setItem((prevItem) => ({...prevItem, [name]: val,}));
+    };
+
     const onTabChange = (e: { index: number }) => {
         setActiveIndex(e.index);
     };
@@ -62,6 +89,7 @@ const Edit: React.FC<DocumentCategorieFieldRuleEditAgentType> = ({visible, onClo
         setSubmitted(false);
         onClose();
     };
+
 
     const isFormValid = () => {
         let errorMessages = new Array<string>();
@@ -83,32 +111,6 @@ const Edit: React.FC<DocumentCategorieFieldRuleEditAgentType> = ({visible, onClo
             setSubmitted(false);
     }
 };
-
-    const onInputTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-        const value = (e.target && e.target.value) || '';
-        setItem({ ...item, [name]: value });
-        };
-    const onInputDateChange = (e: CalendarChangeEvent, name: string) => {
-        const value = e.value || '';
-        setItem({ ...item, [name]: value });
-    };
-
-    const onInputNumerChange = (e: InputNumberChangeEvent, name: string) => {
-        const val = e.value === null ? null : +e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
-
-    const onMultiSelectChange = (e: any, field: string) => {
-        if (e && e.value && Array.isArray(e.value)) {
-            const selectedValues = e.value.map(option => option && option.value);
-            setItem(prevState => ({ ...prevState, [field]: selectedValues, }));
-        }
-    };
-
-    const onBooleanInputChange = (e: any, name: string) => {
-        const val = e.value;
-        setItem((prevItem) => ({ ...prevItem, [name]: val, }));
-    };
 
     const itemDialogFooter = ( <>
         <Button label="Cancel" icon="pi pi-times" text onClick={hideDialog} />
