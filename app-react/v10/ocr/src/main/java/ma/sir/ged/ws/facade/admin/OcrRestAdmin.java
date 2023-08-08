@@ -32,9 +32,9 @@ public class OcrRestAdmin {
     // key==> destinationLanguage ;; value ==> fra
     // key==> image ;; value ==> browse your image from :: resources\ocr
     @PostMapping("/")
-    public String DoOCR(@RequestParam("destinationLanguage") String destinationLanguage,
-                        @RequestParam("image") MultipartFile image) throws IOException {
-
+    public String DoOCR(
+            @RequestParam("image") MultipartFile image) throws IOException {
+        String destinationLanguage = "eng";
 
         OcrModel request = new OcrModel();
         request.setDestinationLanguage(destinationLanguage);
