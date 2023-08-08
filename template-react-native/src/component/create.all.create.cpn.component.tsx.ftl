@@ -61,18 +61,20 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     const { control, handleSubmit, reset } = useForm<PurchaseDto>({
         defaultValues: {
-            reference: '',
-            total: null,
-            description: '',
-            client: undefined,
-        },
-    });
-
-    const { control: itemControl, handleSubmit: handleItemSubmit, reset: resetItem } = useForm<PurchaseItemDto>({
-        defaultValues: {
-            price: null,
-            quantity: null,
-            product: undefined,
+    <#list pojo.fields as field>
+        <#if field.generic>
+        ${field.name}: undefined,
+        </#if>
+        <#if field.simple && !field.id>
+        <#if field.large>
+        ${field.name}: '' ,
+        <#elseif innerField.pureString>
+        ${field.name}: '' ,
+        <#elseif field.nombre>
+        ${field.name}: null ,
+        </#if>
+        </#if>
+    </#list>
         },
     });
 
@@ -140,6 +142,25 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     <#list pojo.fields as field>
         <#if field.list && !field.association>
+
+    const { control: itemControl, handleSubmit: handleItemSubmit, reset: resetItem } = useForm<${field.typeAsPojo.name}Dto>({
+        defaultValues: {
+    <#list field.typeAsPojo.fields as innerField>
+        <#if innerField.generic>
+            ${innerField.name}: undefined,
+        </#if>
+        <#if innerField.simple && !innerField.id>
+            <#if innerField.large>
+            ${innerField.name}: '' ,
+            <#elseif innerField.pureString>
+            ${innerField.name}: '' ,
+            <#elseif innerField.nombre>
+            ${innerField.name}: null ,
+            </#if>
+        </#if>
+    </#list>
+        },
+    });
 
     const ${field.name}ItemCollapsible = () => {
         setIsItemCollapsed(!isItemCollapsed);
