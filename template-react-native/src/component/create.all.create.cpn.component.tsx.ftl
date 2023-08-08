@@ -33,7 +33,6 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
     const [${fieldGeneric.name}s, set${fieldGeneric.name?cap_first}s] = useState<${fieldGeneric.typeAsPojo.name}Dto[]>([]);
     const [${fieldGeneric.name}ModalVisible, set${fieldGeneric.name?cap_first}ModalVisible] = useState(false);
-    type ${fieldGeneric.name?cap_first}Response = AxiosResponse<${fieldGeneric.name?cap_first}Dto[]>;
     const [selected${fieldGeneric.name?cap_first}, setSelected${fieldGeneric.name?cap_first}] = useState<${fieldGeneric.name?cap_first}Dto>(
     {
     <#list fieldGeneric.typeAsPojo.fields as innerField>
@@ -42,7 +41,7 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
             <#elseif innerField.pureString>
                 ${innerField.name} : '' ,
             <#elseif innerField.typeAsPojo.labelOrReferenceOrId>
-                ${innerField.name} : null ,
+                ${innerField.name} : select a ${fieldGeneric.name},
             <#elseif innerField.simple >
                 ${innerField.name} : null ,
             </#if>
@@ -59,6 +58,60 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     const [${field.name?uncap_first}, set${field.name?cap_first}] = useState<${field.typeAsPojo.name}Dto[]>(new Array<${field.typeAsPojo.name}Dto>());
             </#if>
       </#list>
+
+    const { control, handleSubmit, reset } = useForm<PurchaseDto>({
+        defaultValues: {
+            reference: '',
+            total: null,
+            description: '',
+            client: undefined,
+        },
+    });
+
+    const { control: itemControl, handleSubmit: handleItemSubmit, reset: resetItem } = useForm<PurchaseItemDto>({
+        defaultValues: {
+            price: null,
+            quantity: null,
+            product: undefined,
+        },
+    });
+
+    const purchaseCollapsible = () => {
+        setIsPurchaseCollapsed(!isPurchaseCollapsed);
+        setIsItemCollapsed(true);
+        setIsItemsCollapsed(true);
+    };
+
+    const itemCollapsible = () => {
+        setIsItemCollapsed(!isItemCollapsed);
+        setIsPurchaseCollapsed(true);
+        setIsItemsCollapsed(true);
+    };
+
+    const itemsCollapsible = () => {
+        setIsItemsCollapsed(!isItemsCollapsed);
+        setIsPurchaseCollapsed(true);
+        setIsItemCollapsed(true);
+    };
+
+    const onProductSelect = (item) => {
+        console.log('Selected Item:', item);
+        setSelectedProduct(item);
+        setProductModalVisible(false);
+    };
+
+    const onClientSelect = (item) => {
+        console.log('Selected Item:', item);
+        setSelectedClient(item);
+        setCLientModalVisible(false);
+    };
+
+
+        <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
+        const handleClose${fieldGeneric.name?cap_first}Modal = () => {
+            set${fieldGeneric.name?cap_first}ModalVisible(false);
+        };
+        </#list>
 
 
     useEffect(() => {
@@ -155,14 +208,24 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         </#if>
     </#list>
 
-
-
-
-
-
-
-
-
+    const handleSave = async (item: ${pojo.name}Dto) => {
+        item.client = selectedClient;
+        item.purchaseItems = purchaseItems;
+        Keyboard.dismiss();
+        try {
+            await ${pojo.name}${role.name?cap_first}Service.save( item );
+            setIsItemsCollapsed(!isItemsCollapsed);
+            reset();
+            setSelectedClient({ id: null, fullName: 'Select a Client', email: '' });
+            setShowSavedModal(true);
+            setTimeout(() => setShowSavedModal(false), 1500);
+            setPurchaseItems([]);
+        } catch (error) {
+            console.error('Error saving ${pojo.name?uncap_first}:', error);
+            setShowErrorModal(true);
+            setTimeout(() => setShowErrorModal(false), 1500);
+        }
+    };
 
 return(
     <SafeAreaView style={{ flex: 1, backgroundColor: '#e6e8fa' }} >
@@ -264,7 +327,7 @@ return(
         <SaveFeedbackModal isVisible={showSavedModal} icon={'checkmark-done-sharp'} message={'saved successfully'} iconColor={'#32cd32'} />
         <SaveFeedbackModal isVisible={showErrorModal} icon={'close-sharp'} message={'Error on saving'} iconColor={'red'} />
         <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
-        {${fieldGeneric.name}s !== null && ${fieldGeneric.name}s.length > 0 ? ( <FilterModal visibility={${fieldGeneric.name}ModalVisible} placeholder={"Select a ${fieldGeneric.name?cap_first}"} onItemSelect={on${fieldGeneric.name?cap_first}Select} items={${fieldGeneric.name}s} onClose={handleCloseModal} variable={'${fieldGeneric.typeAsPojo.labelOrReferenceOrId.name}'} /> ) : null}
+        {${fieldGeneric.name}s !== null && ${fieldGeneric.name}s.length > 0 ? ( <FilterModal visibility={${fieldGeneric.name}ModalVisible} placeholder={"Select a ${fieldGeneric.name?cap_first}"} onItemSelect={on${fieldGeneric.name?cap_first}Select} items={${fieldGeneric.name}s} onClose={handleClose${fieldGeneric.name?cap_first}Modal} variable={'${fieldGeneric.typeAsPojo.labelOrReferenceOrId.name}'} /> ) : null}
         </#list>
     </SafeAreaView>
 );
