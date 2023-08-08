@@ -76,42 +76,23 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         },
     });
 
-    const purchaseCollapsible = () => {
-        setIsPurchaseCollapsed(!isPurchaseCollapsed);
+    const ${pojo.name?uncap_first}Collapsible = () => {
+        setIs${pojo.name}Collapsed(!is${pojo.name}Collapsed);
         setIsItemCollapsed(true);
         setIsItemsCollapsed(true);
     };
 
-    const itemCollapsible = () => {
-        setIsItemCollapsed(!isItemCollapsed);
-        setIsPurchaseCollapsed(true);
-        setIsItemsCollapsed(true);
+    <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
+    const handleClose${fieldGeneric.name?cap_first}Modal = () => {
+        set${fieldGeneric.name?cap_first}ModalVisible(false);
     };
 
-    const itemsCollapsible = () => {
-        setIsItemsCollapsed(!isItemsCollapsed);
-        setIsPurchaseCollapsed(true);
-        setIsItemCollapsed(true);
-    };
-
-    const onProductSelect = (item) => {
+    const on${fieldGeneric.name?cap_first}Select = (item) => {
         console.log('Selected Item:', item);
-        setSelectedProduct(item);
-        setProductModalVisible(false);
+        setSelected${fieldGeneric.name?cap_first}(item);
+        set${fieldGeneric.name?cap_first}ModalVisible(false);
     };
-
-    const onClientSelect = (item) => {
-        console.log('Selected Item:', item);
-        setSelectedClient(item);
-        setCLientModalVisible(false);
-    };
-
-
-        <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
-        const handleClose${fieldGeneric.name?cap_first}Modal = () => {
-            set${fieldGeneric.name?cap_first}ModalVisible(false);
-        };
-        </#list>
+    </#list>
 
 
     useEffect(() => {
@@ -159,6 +140,19 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     <#list pojo.fields as field>
         <#if field.list && !field.association>
+
+    const ${field.name}ItemCollapsible = () => {
+        setIsItemCollapsed(!isItemCollapsed);
+        setIs${pojo.name}Collapsed(true);
+        setIsItemsCollapsed(true);
+    };
+
+    const ${field.name}ItemsCollapsible = () => {
+        setIsItemsCollapsed(!isItemsCollapsed);
+        setIs${pojo.name}Collapsed(true);
+        setIsItemCollapsed(true);
+    };
+
     const handleAdd${field.name?cap_first} = (data: PurchaseItemDto) => {
         if (data && selectedProduct.code) {
             const newPurchaseItem: PurchaseItemDto = { price: data.price, quantity: data.quantity, product: selectedProduct, purchase: undefined
