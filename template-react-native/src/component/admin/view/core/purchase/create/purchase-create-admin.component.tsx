@@ -26,10 +26,12 @@ const PurchaseAdminCreate = () => {
   const [products, setProducts] = useState<ProductDto[]>([]);
   const [purchaseItems, setPurchaseItems] = useState<PurchaseItemDto[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<ProductDto>({ code: '', reference: 'Select a Product' });
+
   const [productModalVisible, setProductModalVisible] = useState(false);
   const [selectedClient, setSelectedClient] = useState<ClientDto>({ id: null, fullName: 'Select a Client', email: '' });
   const [clientModalVisible, setCLientModalVisible] = useState(false);
   const [isPurchaseCollapsed, setIsPurchaseCollapsed] = useState(true);
+
   const [isItemCollapsed, setIsItemCollapsed] = useState(true);
   const [isItemsCollapsed, setIsItemsCollapsed] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
