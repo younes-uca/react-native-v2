@@ -36,12 +36,12 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     const [selected${fieldGeneric.name?cap_first}, setSelected${fieldGeneric.name?cap_first}] = useState<${fieldGeneric.name?cap_first}Dto>(
     {
     <#list fieldGeneric.typeAsPojo.fields as innerField>
-            <#if innerField.dateTime>
+            <#if innerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>
+                ${innerField.name} : 'select a ${innerField.formatedName}',
+            <#elseif innerField.dateTime>
                 ${innerField.name} : undefined ,
-            <#elseif innerField.pureString>
+            <#elseif innerField.pureString || innerField.large>
                 ${innerField.name} : '' ,
-            <#elseif innerField.typeAsPojo.labelOrReferenceOrId>
-                ${innerField.name} : select a ${fieldGeneric.name},
             <#elseif innerField.simple >
                 ${innerField.name} : null ,
             </#if>
@@ -59,20 +59,19 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
             </#if>
       </#list>
 
-    const { control, handleSubmit, reset } = useForm<PurchaseDto>({
+    const { control, handleSubmit, reset } = useForm<${pojo.name}Dto>({
         defaultValues: {
     <#list pojo.fields as field>
         <#if field.generic>
         ${field.name}: undefined,
-        </#if>
-        <#if field.simple && !field.id>
-        <#if field.large>
+        <#elseif field.simple && !field.id>
+            <#if field.large>
         ${field.name}: '' ,
-        <#elseif innerField.pureString>
+            <#elseif field.pureString>
         ${field.name}: '' ,
-        <#elseif field.nombre>
+            <#elseif field.nombre>
         ${field.name}: null ,
-        </#if>
+             </#if>
         </#if>
     </#list>
         },
@@ -105,8 +104,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         <#if field.list>
             <#if field.association>
         ${field.fieldOfAssociation.typeAsPojo.name?uncap_first}${role.name?cap_first}Service.getList().then(({data}) => {
-        const ${field.name?cap_first} = data?.map(prepare${field.typeAsPojo.name})
-        set${field.name?cap_first}(${field.name})
+            const ${field.name?cap_first} = data?.map(prepare${field.typeAsPojo.name})
+            set${field.name?cap_first}(${field.name})
         })
             </#if>
 
@@ -142,17 +141,13 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     <#list pojo.fields as field>
         <#if field.list && !field.association>
-
     const { control: itemControl, handleSubmit: handleItemSubmit, reset: resetItem } = useForm<${field.typeAsPojo.name}Dto>({
         defaultValues: {
     <#list field.typeAsPojo.fields as innerField>
         <#if innerField.generic>
             ${innerField.name}: undefined,
-        </#if>
-        <#if innerField.simple && !innerField.id>
-            <#if innerField.large>
-            ${innerField.name}: '' ,
-            <#elseif innerField.pureString>
+        <#elseif innerField.simple && !innerField.id>
+            <#if innerField.large || innerField.pureString>
             ${innerField.name}: '' ,
             <#elseif innerField.nombre>
             ${innerField.name}: null ,
@@ -174,11 +169,11 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         setIsItemCollapsed(true);
     };
 
-    const handleAdd${field.name?cap_first} = (data: PurchaseItemDto) => {
-        if (data && selectedProduct.code) {
-            const newPurchaseItem: PurchaseItemDto = { price: data.price, quantity: data.quantity, product: selectedProduct, purchase: undefined
-            };
-            setPurchaseItems((prevItems) => [...prevItems, newPurchaseItem]);
+
+    const handleAdd${field.name?cap_first} = (data: ${field.typeAsPojo.name}Dto) => {
+        if (data) {
+            const new${field.typeAsPojo.name}: ${field.typeAsPojo.name}Dto = { price: data.price, quantity: data.quantity, product: selectedProduct, purchase: undefined };
+            set${field.name?cap_first}((prevItems) => [...prevItems, newPurchaseItem]);
             resetItem({ price: null, quantity: null, });
             setSelectedProduct({ code: '', reference: 'Select a Product' });
         }
@@ -215,13 +210,15 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
                 updatedPurchase = item;
             }
         });
-        resetItem({ price: updatedPurchase.price, quantity: updatedPurchase.quantity,});
+
+    resetItem({ price: updatedPurchase.price, quantity: updatedPurchase.quantity,});
         setSelectedProduct(updatedPurchase.product);
         setIsItemsCollapsed(!isItemsCollapsed);
         setIsItemCollapsed(!isItemCollapsed);
     };
         </#if>
     </#list>
+
 
     const handleSave = async (item: ${pojo.name}Dto) => {
         item.client = selectedClient;
