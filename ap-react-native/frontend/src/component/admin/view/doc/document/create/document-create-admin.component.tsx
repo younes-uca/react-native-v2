@@ -13,34 +13,34 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DocumentAdminService} from '../../../../../../controller/service/admin/DocumentAdminService';
 import  {DocumentDto}  from '../../../../../../controller/model/DocumentDto';
 
-import {TagDto} from '../../../../../../controller/model/TagDto';
-import {TagAdminService} from '../../../../../../controller/service/admin/TagAdminService';
-import {DocumentCategorieDto} from '../../../../../../controller/model/DocumentCategorieDto';
-import {DocumentCategorieAdminService} from '../../../../../../controller/service/admin/DocumentCategorieAdminService';
-import {AccessShareDto} from '../../../../../../controller/model/AccessShareDto';
-import {AccessShareAdminService} from '../../../../../../controller/service/admin/AccessShareAdminService';
-import {DocumentTypeDto} from '../../../../../../controller/model/DocumentTypeDto';
-import {DocumentTypeAdminService} from '../../../../../../controller/service/admin/DocumentTypeAdminService';
 import {DocumentStateDto} from '../../../../../../controller/model/DocumentStateDto';
 import {DocumentStateAdminService} from '../../../../../../controller/service/admin/DocumentStateAdminService';
+import {DocumentTypeDto} from '../../../../../../controller/model/DocumentTypeDto';
+import {DocumentTypeAdminService} from '../../../../../../controller/service/admin/DocumentTypeAdminService';
+import {EntiteAdministrativeDto} from '../../../../../../controller/model/EntiteAdministrativeDto';
+import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService';
 import {DocumentPartageUtilisateurDto} from '../../../../../../controller/model/DocumentPartageUtilisateurDto';
 import {DocumentPartageUtilisateurAdminService} from '../../../../../../controller/service/admin/DocumentPartageUtilisateurAdminService';
+import {AccessShareDto} from '../../../../../../controller/model/AccessShareDto';
+import {AccessShareAdminService} from '../../../../../../controller/service/admin/AccessShareAdminService';
 import {FieldDto} from '../../../../../../controller/model/FieldDto';
 import {FieldAdminService} from '../../../../../../controller/service/admin/FieldAdminService';
 import {DocumentFieldStateDto} from '../../../../../../controller/model/DocumentFieldStateDto';
 import {DocumentFieldStateAdminService} from '../../../../../../controller/service/admin/DocumentFieldStateAdminService';
-import {DocumentPartageGroupeDto} from '../../../../../../controller/model/DocumentPartageGroupeDto';
-import {DocumentPartageGroupeAdminService} from '../../../../../../controller/service/admin/DocumentPartageGroupeAdminService';
-import {GroupeDto} from '../../../../../../controller/model/GroupeDto';
-import {GroupeAdminService} from '../../../../../../controller/service/admin/GroupeAdminService';
-import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
-import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
-import {DocumentFieldDto} from '../../../../../../controller/model/DocumentFieldDto';
-import {DocumentFieldAdminService} from '../../../../../../controller/service/admin/DocumentFieldAdminService';
-import {EntiteAdministrativeDto} from '../../../../../../controller/model/EntiteAdministrativeDto';
-import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService';
 import {DocumentTagDto} from '../../../../../../controller/model/DocumentTagDto';
 import {DocumentTagAdminService} from '../../../../../../controller/service/admin/DocumentTagAdminService';
+import {TagDto} from '../../../../../../controller/model/TagDto';
+import {TagAdminService} from '../../../../../../controller/service/admin/TagAdminService';
+import {DocumentCategorieDto} from '../../../../../../controller/model/DocumentCategorieDto';
+import {DocumentCategorieAdminService} from '../../../../../../controller/service/admin/DocumentCategorieAdminService';
+import {DocumentPartageGroupeDto} from '../../../../../../controller/model/DocumentPartageGroupeDto';
+import {DocumentPartageGroupeAdminService} from '../../../../../../controller/service/admin/DocumentPartageGroupeAdminService';
+import {DocumentFieldDto} from '../../../../../../controller/model/DocumentFieldDto';
+import {DocumentFieldAdminService} from '../../../../../../controller/service/admin/DocumentFieldAdminService';
+import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
+import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
+import {GroupeDto} from '../../../../../../controller/model/GroupeDto';
+import {GroupeAdminService} from '../../../../../../controller/service/admin/GroupeAdminService';
 
 const DocumentAdminCreate = () => {
 
@@ -91,30 +91,48 @@ const DocumentAdminCreate = () => {
     const [selectedDocumentState, setSelectedDocumentState] = useState<DocumentStateDto>({id : null ,code : '' ,libelle : 'select a Document state',style : '' , });
 
 
-    const tagAdminService = new TagAdminService();
-    const documentCategorieAdminService = new DocumentCategorieAdminService();
-    const accessShareAdminService = new AccessShareAdminService();
-    const documentTypeAdminService = new DocumentTypeAdminService();
     const documentStateAdminService = new DocumentStateAdminService();
+    const documentTypeAdminService = new DocumentTypeAdminService();
+    const entiteAdministrativeAdminService = new EntiteAdministrativeAdminService();
     const documentPartageUtilisateurAdminService = new DocumentPartageUtilisateurAdminService();
+    const accessShareAdminService = new AccessShareAdminService();
     const fieldAdminService = new FieldAdminService();
     const documentFieldStateAdminService = new DocumentFieldStateAdminService();
-    const documentPartageGroupeAdminService = new DocumentPartageGroupeAdminService();
-    const groupeAdminService = new GroupeAdminService();
-    const utilisateurAdminService = new UtilisateurAdminService();
-    const documentFieldAdminService = new DocumentFieldAdminService();
-    const entiteAdministrativeAdminService = new EntiteAdministrativeAdminService();
     const documentTagAdminService = new DocumentTagAdminService();
+    const tagAdminService = new TagAdminService();
+    const documentCategorieAdminService = new DocumentCategorieAdminService();
+    const documentPartageGroupeAdminService = new DocumentPartageGroupeAdminService();
+    const documentFieldAdminService = new DocumentFieldAdminService();
+    const utilisateurAdminService = new UtilisateurAdminService();
+    const groupeAdminService = new GroupeAdminService();
 
     const [documentFields, setDocumentFields] = useState<DocumentFieldDto>(new DocumentFieldDto());
     const [isEditModeDocumentFields, setIsEditModeDocumentFields] = useState(false);
     const [editIndexDocumentFields, setEditIndexDocumentFields] = useState(null);
+
+    const [documentFieldsCollapsible, setDocumentFieldsCollapsible] = useState(false);
+    const [isDocumentFieldsCollapsed, setIsDocumentFieldsCollapsed] = useState(false);
+    const [isDocumentFields, setIsDocumentFields] = useState(false);
+    const [isEditDocumentFieldsMode, setIsEditDocumentFieldsMode] = useState(false);
+
     const [documentPartageGroupes, setDocumentPartageGroupes] = useState<DocumentPartageGroupeDto>(new DocumentPartageGroupeDto());
     const [isEditModeDocumentPartageGroupes, setIsEditModeDocumentPartageGroupes] = useState(false);
     const [editIndexDocumentPartageGroupes, setEditIndexDocumentPartageGroupes] = useState(null);
+
+    const [documentPartageGroupesCollapsible, setDocumentPartageGroupesCollapsible] = useState(false);
+    const [isDocumentPartageGroupesCollapsed, setIsDocumentPartageGroupesCollapsed] = useState(false);
+    const [isDocumentPartageGroupes, setIsDocumentPartageGroupes] = useState(false);
+    const [isEditDocumentPartageGroupesMode, setIsEditDocumentPartageGroupesMode] = useState(false);
+
     const [documentPartageUtilisateurs, setDocumentPartageUtilisateurs] = useState<DocumentPartageUtilisateurDto>(new DocumentPartageUtilisateurDto());
     const [isEditModeDocumentPartageUtilisateurs, setIsEditModeDocumentPartageUtilisateurs] = useState(false);
     const [editIndexDocumentPartageUtilisateurs, setEditIndexDocumentPartageUtilisateurs] = useState(null);
+
+    const [documentPartageUtilisateursCollapsible, setDocumentPartageUtilisateursCollapsible] = useState(false);
+    const [isDocumentPartageUtilisateursCollapsed, setIsDocumentPartageUtilisateursCollapsed] = useState(false);
+    const [isDocumentPartageUtilisateurs, setIsDocumentPartageUtilisateurs] = useState(false);
+    const [isEditDocumentPartageUtilisateursMode, setIsEditDocumentPartageUtilisateursMode] = useState(false);
+
     const [documentTags, setDocumentTags] = useState<DocumentTagDto[]>(new Array<DocumentTagDto>());
 
     const { control, handleSubmit, reset } = useForm<DocumentDto>({
@@ -285,7 +303,6 @@ const DocumentAdminCreate = () => {
             setDocumentFields((prevItems) => [...prevItems, newDocumentField]);
             resetItem({value: '' ,});
                 setSelectedField({id : null ,code : '' ,libelle : 'select a Field',});
-                setSelectedDocument({id : null ,reference : 'select a Document',referenceGed : null ,uploadDate : undefined ,dateLastUpdate : undefined ,content : '' ,folder : null ,size : null ,description : '' ,archive : null ,versionne : null ,});
                 setSelectedDocumentFieldState({id : null ,code : '' ,libelle : 'select a Document field state',style : '' ,});
         }
     };
@@ -356,7 +373,6 @@ const DocumentAdminCreate = () => {
             const newDocumentPartageGroupe: DocumentPartageGroupeDto = { document: undefined ,groupe: selectedGroupe , dateShare: data.dateShare ,accessShare: selectedAccessShare ,  };
             setDocumentPartageGroupes((prevItems) => [...prevItems, newDocumentPartageGroupe]);
             resetItem({});
-                setSelectedDocument({id : null ,reference : 'select a Document',referenceGed : null ,uploadDate : undefined ,dateLastUpdate : undefined ,content : '' ,folder : null ,size : null ,description : '' ,archive : null ,versionne : null ,});
                 setSelectedGroupe({id : null ,code : '' ,libelle : 'select a Groupe',});
                 setSelectedAccessShare({id : null ,code : '' ,libelle : 'select a Access share',});
         }
@@ -428,7 +444,6 @@ const DocumentAdminCreate = () => {
             const newDocumentPartageUtilisateur: DocumentPartageUtilisateurDto = { document: undefined ,utilisateur: selectedUtilisateur , dateShare: data.dateShare ,accessShare: selectedAccessShare ,  };
             setDocumentPartageUtilisateurs((prevItems) => [...prevItems, newDocumentPartageUtilisateur]);
             resetItem({});
-                setSelectedDocument({id : null ,reference : 'select a Document',referenceGed : null ,uploadDate : undefined ,dateLastUpdate : undefined ,content : '' ,folder : null ,size : null ,description : '' ,archive : null ,versionne : null ,});
                 setSelectedUtilisateur({id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' ,});
                 setSelectedAccessShare({id : null ,code : '' ,libelle : 'select a Access share',});
         }
@@ -564,23 +579,23 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add Document fields</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={isdocumentFieldsCollapsed}>
-                <TouchableOpacity onPress={() => setfieldModalVisible(true)} style={styles.placeHolder} >
+            <Collapsible collapsed={isDocumentFieldsCollapsed}>
+                <TouchableOpacity onPress={() => setFieldModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedfield.libelle}</Text>
+                        <Text>{selectedField.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setdocumentModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setDocumentModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocument.reference}</Text>
+                        <Text>{selectedDocument.reference}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
                             <CustomInput control={itemControl} name={'value'} placeholder={'Value'} keyboardT="default" />
-                <TouchableOpacity onPress={() => setdocumentFieldStateModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setDocumentFieldStateModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocumentFieldState.libelle}</Text>
+                        <Text>{selectedDocumentFieldState.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -608,7 +623,7 @@ return(
                             <TouchableOpacity onPress={() => handleDeleteDocumentFields(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValuesDocumentFields(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>
@@ -623,22 +638,22 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add Document partage groupes</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={isdocumentPartageGroupesCollapsed}>
-                <TouchableOpacity onPress={() => setdocumentModalVisible(true)} style={styles.placeHolder} >
+            <Collapsible collapsed={isDocumentPartageGroupesCollapsed}>
+                <TouchableOpacity onPress={() => setDocumentModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocument.reference}</Text>
+                        <Text>{selectedDocument.reference}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setgroupeModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setGroupeModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedgroupe.libelle}</Text>
+                        <Text>{selectedGroupe.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setaccessShareModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setAccessShareModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedaccessShare.libelle}</Text>
+                        <Text>{selectedAccessShare.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -666,7 +681,7 @@ return(
                             <TouchableOpacity onPress={() => handleDeleteDocumentPartageGroupes(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValuesDocumentPartageGroupes(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>
@@ -681,22 +696,22 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add Document partage utilisateurs</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={isdocumentPartageUtilisateursCollapsed}>
-                <TouchableOpacity onPress={() => setdocumentModalVisible(true)} style={styles.placeHolder} >
+            <Collapsible collapsed={isDocumentPartageUtilisateursCollapsed}>
+                <TouchableOpacity onPress={() => setDocumentModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocument.reference}</Text>
+                        <Text>{selectedDocument.reference}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setutilisateurModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setUtilisateurModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedutilisateur.nom}</Text>
+                        <Text>{selectedUtilisateur.nom}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setaccessShareModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setAccessShareModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedaccessShare.libelle}</Text>
+                        <Text>{selectedAccessShare.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -724,7 +739,7 @@ return(
                             <TouchableOpacity onPress={() => handleDeleteDocumentPartageUtilisateurs(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValuesDocumentPartageUtilisateurs(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>

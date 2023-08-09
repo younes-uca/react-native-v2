@@ -13,10 +13,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DocumentCategorieFieldAgentService} from '../../../../../../controller/service/agent/DocumentCategorieFieldAgentService';
 import  {DocumentCategorieFieldDto}  from '../../../../../../controller/model/DocumentCategorieFieldDto';
 
-import {FieldDto} from '../../../../../../controller/model/FieldDto';
-import {FieldAgentService} from '../../../../../../controller/service/agent/FieldAgentService';
 import {DocumentCategorieDto} from '../../../../../../controller/model/DocumentCategorieDto';
 import {DocumentCategorieAgentService} from '../../../../../../controller/service/agent/DocumentCategorieAgentService';
+import {FieldDto} from '../../../../../../controller/model/FieldDto';
+import {FieldAgentService} from '../../../../../../controller/service/agent/FieldAgentService';
 import {DocumentCategorieFieldRuleDto} from '../../../../../../controller/model/DocumentCategorieFieldRuleDto';
 import {DocumentCategorieFieldRuleAgentService} from '../../../../../../controller/service/agent/DocumentCategorieFieldRuleAgentService';
 
@@ -30,19 +30,19 @@ const DocumentCategorieFieldAgentCreate = () => {
 
     const [fields, setFields] = useState<FieldDto[]>([]);
     const [fieldModalVisible, setFieldModalVisible] = useState(false);
-    const [selectedField, setSelectedField] = useState<FieldDto>(id : null ,code : '' ,libelle : 'select a Field', });
+    const [selectedField, setSelectedField] = useState<FieldDto>({id : null ,code : '' ,libelle : 'select a Field', });
 
     const [documentCategorieFieldRules, setDocumentCategorieFieldRules] = useState<DocumentCategorieFieldRuleDto[]>([]);
     const [documentCategorieFieldRuleModalVisible, setDocumentCategorieFieldRuleModalVisible] = useState(false);
-    const [selectedDocumentCategorieFieldRule, setSelectedDocumentCategorieFieldRule] = useState<DocumentCategorieFieldRuleDto>(id : null ,code : '' ,libelle : 'select a Document categorie field rule',expresion : '' , });
+    const [selectedDocumentCategorieFieldRule, setSelectedDocumentCategorieFieldRule] = useState<DocumentCategorieFieldRuleDto>({id : null ,code : '' ,libelle : 'select a Document categorie field rule',expresion : '' , });
 
     const [documentCategories, setDocumentCategories] = useState<DocumentCategorieDto[]>([]);
     const [documentCategorieModalVisible, setDocumentCategorieModalVisible] = useState(false);
-    const [selectedDocumentCategorie, setSelectedDocumentCategorie] = useState<DocumentCategorieDto>(id : null ,code : '' ,libelle : 'select a Document categorie', });
+    const [selectedDocumentCategorie, setSelectedDocumentCategorie] = useState<DocumentCategorieDto>({id : null ,code : '' ,libelle : 'select a Document categorie', });
 
 
-    const fieldAgentService = new FieldAgentService();
     const documentCategorieAgentService = new DocumentCategorieAgentService();
+    const fieldAgentService = new FieldAgentService();
     const documentCategorieFieldRuleAgentService = new DocumentCategorieFieldRuleAgentService();
 
 

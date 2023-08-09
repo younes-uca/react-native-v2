@@ -13,14 +13,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GroupeAdminService} from '../../../../../../controller/service/admin/GroupeAdminService';
 import  {GroupeDto}  from '../../../../../../controller/model/GroupeDto';
 
-import {RoleUtilisateurDto} from '../../../../../../controller/model/RoleUtilisateurDto';
-import {RoleUtilisateurAdminService} from '../../../../../../controller/service/admin/RoleUtilisateurAdminService';
 import {EtatUtilisateurDto} from '../../../../../../controller/model/EtatUtilisateurDto';
 import {EtatUtilisateurAdminService} from '../../../../../../controller/service/admin/EtatUtilisateurAdminService';
-import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
-import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
+import {RoleUtilisateurDto} from '../../../../../../controller/model/RoleUtilisateurDto';
+import {RoleUtilisateurAdminService} from '../../../../../../controller/service/admin/RoleUtilisateurAdminService';
 import {GroupeUtilisateurDto} from '../../../../../../controller/model/GroupeUtilisateurDto';
 import {GroupeUtilisateurAdminService} from '../../../../../../controller/service/admin/GroupeUtilisateurAdminService';
+import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
+import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
 
 const GroupeAdminCreate = () => {
 
@@ -32,25 +32,31 @@ const GroupeAdminCreate = () => {
 
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [utilisateurModalVisible, setUtilisateurModalVisible] = useState(false);
-    const [selectedUtilisateur, setSelectedUtilisateur] = useState<UtilisateurDto>(id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' , });
+    const [selectedUtilisateur, setSelectedUtilisateur] = useState<UtilisateurDto>({id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' , });
 
     const [etatUtilisateurs, setEtatUtilisateurs] = useState<EtatUtilisateurDto[]>([]);
     const [etatUtilisateurModalVisible, setEtatUtilisateurModalVisible] = useState(false);
-    const [selectedEtatUtilisateur, setSelectedEtatUtilisateur] = useState<EtatUtilisateurDto>(id : null ,code : '' ,libelle : 'select a Etat utilisateur', });
+    const [selectedEtatUtilisateur, setSelectedEtatUtilisateur] = useState<EtatUtilisateurDto>({id : null ,code : '' ,libelle : 'select a Etat utilisateur', });
 
     const [roleUtilisateurs, setRoleUtilisateurs] = useState<RoleUtilisateurDto[]>([]);
     const [roleUtilisateurModalVisible, setRoleUtilisateurModalVisible] = useState(false);
-    const [selectedRoleUtilisateur, setSelectedRoleUtilisateur] = useState<RoleUtilisateurDto>(id : null ,code : '' ,libelle : 'select a Role utilisateur', });
+    const [selectedRoleUtilisateur, setSelectedRoleUtilisateur] = useState<RoleUtilisateurDto>({id : null ,code : '' ,libelle : 'select a Role utilisateur', });
 
 
-    const roleUtilisateurAdminService = new RoleUtilisateurAdminService();
     const etatUtilisateurAdminService = new EtatUtilisateurAdminService();
-    const utilisateurAdminService = new UtilisateurAdminService();
+    const roleUtilisateurAdminService = new RoleUtilisateurAdminService();
     const groupeUtilisateurAdminService = new GroupeUtilisateurAdminService();
+    const utilisateurAdminService = new UtilisateurAdminService();
 
     const [groupeUtilisateurs, setGroupeUtilisateurs] = useState<GroupeUtilisateurDto>(new GroupeUtilisateurDto());
     const [isEditModeGroupeUtilisateurs, setIsEditModeGroupeUtilisateurs] = useState(false);
     const [editIndexGroupeUtilisateurs, setEditIndexGroupeUtilisateurs] = useState(null);
+
+    const [groupeUtilisateursCollapsible, setGroupeUtilisateursCollapsible] = useState(false);
+    const [isGroupeUtilisateursCollapsed, setIsGroupeUtilisateursCollapsed] = useState(false);
+    const [isGroupeUtilisateurs, setIsGroupeUtilisateurs] = useState(false);
+    const [isEditGroupeUtilisateursMode, setIsEditGroupeUtilisateursMode] = useState(false);
+
 
     const { control, handleSubmit, reset } = useForm<GroupeDto>({
         defaultValues: {
@@ -131,7 +137,6 @@ const GroupeAdminCreate = () => {
             const newGroupeUtilisateur: GroupeUtilisateurDto = { groupe: undefined ,utilisateur: selectedUtilisateur , dateAjout: data.dateAjout ,etatUtilisateur: selectedEtatUtilisateur , roleUtilisateur: selectedRoleUtilisateur ,  };
             setGroupeUtilisateurs((prevItems) => [...prevItems, newGroupeUtilisateur]);
             resetItem({});
-                setSelectedGroupe({id : null ,code : '' ,libelle : 'select a Groupe',});
                 setSelectedUtilisateur({id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' ,});
                 setSelectedEtatUtilisateur({id : null ,code : '' ,libelle : 'select a Etat utilisateur',});
                 setSelectedRoleUtilisateur({id : null ,code : '' ,libelle : 'select a Role utilisateur',});
@@ -227,28 +232,28 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add Groupe utilisateurs</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={isgroupeUtilisateursCollapsed}>
-                <TouchableOpacity onPress={() => setgroupeModalVisible(true)} style={styles.placeHolder} >
+            <Collapsible collapsed={isGroupeUtilisateursCollapsed}>
+                <TouchableOpacity onPress={() => setGroupeModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedgroupe.libelle}</Text>
+                        <Text>{selectedGroupe.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setutilisateurModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setUtilisateurModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedutilisateur.nom}</Text>
+                        <Text>{selectedUtilisateur.nom}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setetatUtilisateurModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setEtatUtilisateurModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedetatUtilisateur.libelle}</Text>
+                        <Text>{selectedEtatUtilisateur.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setroleUtilisateurModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setRoleUtilisateurModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedroleUtilisateur.libelle}</Text>
+                        <Text>{selectedRoleUtilisateur.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -277,7 +282,7 @@ return(
                             <TouchableOpacity onPress={() => handleDeleteGroupeUtilisateurs(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValuesGroupeUtilisateurs(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>

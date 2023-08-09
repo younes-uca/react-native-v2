@@ -13,10 +13,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService';
 import  {EntiteAdministrativeDto}  from '../../../../../../controller/model/EntiteAdministrativeDto';
 
-import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
-import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
 import {EntiteAdministrativeTypeDto} from '../../../../../../controller/model/EntiteAdministrativeTypeDto';
 import {EntiteAdministrativeTypeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeTypeAdminService';
+import {UtilisateurDto} from '../../../../../../controller/model/UtilisateurDto';
+import {UtilisateurAdminService} from '../../../../../../controller/service/admin/UtilisateurAdminService';
 
 const EntiteAdministrativeAdminCreate = () => {
 
@@ -28,15 +28,15 @@ const EntiteAdministrativeAdminCreate = () => {
 
     const [utilisateurs, setUtilisateurs] = useState<UtilisateurDto[]>([]);
     const [utilisateurModalVisible, setUtilisateurModalVisible] = useState(false);
-    const [selectedUtilisateur, setSelectedUtilisateur] = useState<UtilisateurDto>(id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' , });
+    const [selectedUtilisateur, setSelectedUtilisateur] = useState<UtilisateurDto>({id : null ,email : '' ,nom : 'select a Utilisateur',prenom : '' , });
 
     const [entiteAdministrativeTypes, setEntiteAdministrativeTypes] = useState<EntiteAdministrativeTypeDto[]>([]);
     const [entiteAdministrativeTypeModalVisible, setEntiteAdministrativeTypeModalVisible] = useState(false);
-    const [selectedEntiteAdministrativeType, setSelectedEntiteAdministrativeType] = useState<EntiteAdministrativeTypeDto>(id : null ,code : '' ,libelle : 'select a Entite administrative type', });
+    const [selectedEntiteAdministrativeType, setSelectedEntiteAdministrativeType] = useState<EntiteAdministrativeTypeDto>({id : null ,code : '' ,libelle : 'select a Entite administrative type', });
 
 
-    const utilisateurAdminService = new UtilisateurAdminService();
     const entiteAdministrativeTypeAdminService = new EntiteAdministrativeTypeAdminService();
+    const utilisateurAdminService = new UtilisateurAdminService();
 
 
     const { control, handleSubmit, reset } = useForm<EntiteAdministrativeDto>({

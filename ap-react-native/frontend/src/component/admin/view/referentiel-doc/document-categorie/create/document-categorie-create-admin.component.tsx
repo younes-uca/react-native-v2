@@ -13,10 +13,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {DocumentCategorieAdminService} from '../../../../../../controller/service/admin/DocumentCategorieAdminService';
 import  {DocumentCategorieDto}  from '../../../../../../controller/model/DocumentCategorieDto';
 
-import {FieldDto} from '../../../../../../controller/model/FieldDto';
-import {FieldAdminService} from '../../../../../../controller/service/admin/FieldAdminService';
 import {DocumentCategorieFieldDto} from '../../../../../../controller/model/DocumentCategorieFieldDto';
 import {DocumentCategorieFieldAdminService} from '../../../../../../controller/service/admin/DocumentCategorieFieldAdminService';
+import {FieldDto} from '../../../../../../controller/model/FieldDto';
+import {FieldAdminService} from '../../../../../../controller/service/admin/FieldAdminService';
 import {DocumentCategorieFieldRuleDto} from '../../../../../../controller/model/DocumentCategorieFieldRuleDto';
 import {DocumentCategorieFieldRuleAdminService} from '../../../../../../controller/service/admin/DocumentCategorieFieldRuleAdminService';
 
@@ -30,20 +30,26 @@ const DocumentCategorieAdminCreate = () => {
 
     const [fields, setFields] = useState<FieldDto[]>([]);
     const [fieldModalVisible, setFieldModalVisible] = useState(false);
-    const [selectedField, setSelectedField] = useState<FieldDto>(id : null ,code : '' ,libelle : 'select a Field', });
+    const [selectedField, setSelectedField] = useState<FieldDto>({id : null ,code : '' ,libelle : 'select a Field', });
 
     const [documentCategorieFieldRules, setDocumentCategorieFieldRules] = useState<DocumentCategorieFieldRuleDto[]>([]);
     const [documentCategorieFieldRuleModalVisible, setDocumentCategorieFieldRuleModalVisible] = useState(false);
-    const [selectedDocumentCategorieFieldRule, setSelectedDocumentCategorieFieldRule] = useState<DocumentCategorieFieldRuleDto>(id : null ,code : '' ,libelle : 'select a Document categorie field rule',expresion : '' , });
+    const [selectedDocumentCategorieFieldRule, setSelectedDocumentCategorieFieldRule] = useState<DocumentCategorieFieldRuleDto>({id : null ,code : '' ,libelle : 'select a Document categorie field rule',expresion : '' , });
 
 
-    const fieldAdminService = new FieldAdminService();
     const documentCategorieFieldAdminService = new DocumentCategorieFieldAdminService();
+    const fieldAdminService = new FieldAdminService();
     const documentCategorieFieldRuleAdminService = new DocumentCategorieFieldRuleAdminService();
 
     const [documentCategorieFields, setDocumentCategorieFields] = useState<DocumentCategorieFieldDto>(new DocumentCategorieFieldDto());
     const [isEditModeDocumentCategorieFields, setIsEditModeDocumentCategorieFields] = useState(false);
     const [editIndexDocumentCategorieFields, setEditIndexDocumentCategorieFields] = useState(null);
+
+    const [documentCategorieFieldsCollapsible, setDocumentCategorieFieldsCollapsible] = useState(false);
+    const [isDocumentCategorieFieldsCollapsed, setIsDocumentCategorieFieldsCollapsed] = useState(false);
+    const [isDocumentCategorieFields, setIsDocumentCategorieFields] = useState(false);
+    const [isEditDocumentCategorieFieldsMode, setIsEditDocumentCategorieFieldsMode] = useState(false);
+
 
     const { control, handleSubmit, reset } = useForm<DocumentCategorieDto>({
         defaultValues: {
@@ -112,7 +118,6 @@ const DocumentCategorieAdminCreate = () => {
             setDocumentCategorieFields((prevItems) => [...prevItems, newDocumentCategorieField]);
             resetItem({});
                 setSelectedField({id : null ,code : '' ,libelle : 'select a Field',});
-                setSelectedDocumentCategorie({id : null ,code : '' ,libelle : 'select a Document categorie',});
                 setSelectedDocumentCategorieFieldRule({id : null ,code : '' ,libelle : 'select a Document categorie field rule',expresion : '' ,});
         }
     };
@@ -193,22 +198,22 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add Document categorie fields</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={isdocumentCategorieFieldsCollapsed}>
-                <TouchableOpacity onPress={() => setfieldModalVisible(true)} style={styles.placeHolder} >
+            <Collapsible collapsed={isDocumentCategorieFieldsCollapsed}>
+                <TouchableOpacity onPress={() => setFieldModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selectedfield.libelle}</Text>
+                        <Text>{selectedField.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setdocumentCategorieModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setDocumentCategorieModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocumentCategorie.libelle}</Text>
+                        <Text>{selectedDocumentCategorie.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setdocumentCategorieFieldRuleModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => setDocumentCategorieFieldRuleModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selecteddocumentCategorieFieldRule.libelle}</Text>
+                        <Text>{selectedDocumentCategorieFieldRule.libelle}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -235,7 +240,7 @@ return(
                             <TouchableOpacity onPress={() => handleDeleteDocumentCategorieFields(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValuesDocumentCategorieFields(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>
