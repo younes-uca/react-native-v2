@@ -10,8 +10,8 @@ import Collapsible from 'react-native-collapsible';
 import FilterModal from '../../../../../../zynerator/FilterModal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService';
-import  {EntiteAdministrativeDto}  from '../../../../../../controller/model/EntiteAdministrativeDto';
+import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService.service';
+import  {EntiteAdministrativeDto}  from '../../../../../../controller/model/EntiteAdministrative.model';
 
 import {EntiteAdministrativeTypeDto} from '../../../../../../controller/model/EntiteAdministrativeTypeDto';
 import {EntiteAdministrativeTypeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeTypeAdminService';

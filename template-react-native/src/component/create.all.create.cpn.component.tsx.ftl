@@ -10,14 +10,14 @@ import Collapsible from 'react-native-collapsible';
 import FilterModal from '../../../../../../zynerator/FilterModal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service';
-import  {${pojo.name?cap_first}Dto}  from '../../../../../../controller/model/${pojo.name?cap_first}Dto';
+import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service.service';
+import  {${pojo.name?cap_first}Dto}  from '../../../../../../controller/model/${pojo.name?cap_first}.model';
 
 <#if pojo.dependencies??>
     <#list pojo.dependencies as dependency>
         <#if dependency?? && dependency.name??>
-import {${dependency.name?cap_first}Dto} from '../../../../../../controller/model/${dependency.name?cap_first}Dto';
-import {${dependency.name?cap_first}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${dependency.name?cap_first}${role.name?cap_first}Service';
+import {${dependency.name?cap_first}Dto} from '../../../../../../controller/model/${dependency.name?cap_first}.model';
+import {${dependency.name?cap_first}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${dependency.name?cap_first}${role.name?cap_first}Service.service';
         </#if>
     </#list>
 </#if>
