@@ -1,0 +1,103 @@
+import { View, Text, ScrollView } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import ConfirmDeleteModal from '../../../../../../zynerator/ConfirmDeleteModal';
+import { AxiosResponse } from 'axios';
+
+import {FieldAdminService} from '../../../../../../controller/service/admin/FieldAdminService';
+import  {FieldDto}  from '../../../../../../controller/model/FieldDto';
+import  {FieldAdminCard}  from './FieldCard';
+
+
+const FieldAdminList: React.FC = () =>  {
+
+    const [fields, setFields] = useState<FieldDto[]>([]);
+    const navigation = useNavigation<NavigationProp<any>>();
+    type FieldResponse = AxiosResponse<FieldDto[]>;
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [fieldId, setFieldId] = useState(0);
+
+    const handleDeletePress = (id: number) => {
+        setFieldId(id);
+        setIsDeleteModalVisible(true);
+    };
+
+    const handleCancelDelete = () => {
+        setIsDeleteModalVisible(false);
+    };
+
+    const handleConfirmDelete = async () => {
+        try {
+            await FieldAdminService.deleteById(fieldId);
+            setFields((prevFields) => prevFields.filter((field) => field.id !== fieldId));
+            setIsDeleteModalVisible(false);
+        } catch (error) {
+            console.error('Error deleting field:', error);
+            setIsDeleteModalVisible(false);
+        }
+    };
+
+    const fetchData = async () => {
+        try {
+            const [] = await Promise.all<FieldResponse>([
+            FieldAdminService.getList(),
+            ]);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchData();
+        }, [])
+    );
+
+    const handleFetchAndUpdate = async (id: number) => {
+        try {
+            const fieldResponse = await FieldAdminService.findById(id);
+            const fieldData = fieldResponse.data;
+            navigation.navigate('FieldUpdate', { field: fieldData });
+        } catch (error) {
+            console.error('Error fetching field data:', error);
+        }
+    };
+
+    const handleFetchAndDetails = async (id: number) => {
+        try {
+            const fieldResponse = await FieldAdminService.findById(id);
+            const fieldData = fieldResponse.data;
+            navigation.navigate('fieldDetails', { field: fieldData });
+        } catch (error) {
+            console.error('Error fetching field data:', error);
+        }
+    };
+
+return(
+    <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: 10, backgroundColor: '#e6e8fa' }}>
+
+        <Text style={{ fontSize: 30, fontWeight: 'bold', alignSelf: 'center', marginVertical: 10, }} >Field List</Text>
+
+        <View style={{ marginBottom: 100 }}>
+            {fields && pfields.length > 0 ? ( fields.map((field) => (
+                <FieldAdminCard key={field.id}
+                    field = {field.code}
+                    field = {field.libelle}
+                    onPressDelete={() => handleDeletePress(field.id)}
+                    onUpdate={() => handleFetchAndUpdate(field.id)}
+                    onDetails={() => handleFetchAndDetails(field.id)}
+                />
+                )) ) : (
+                <Text style={{ fontSize: 20, textAlign: 'center', color: 'red', marginTop: 20 }}>No fields found.</Text>
+            )}
+        </View>
+
+        <ConfirmDeleteModal isVisible={isDeleteModalVisible} handleConfirmDelete={handleConfirmDelete} handleCancelDelete={handleCancelDelete} name={'Field'} />
+
+    </ScrollView>
+
+);
+};
+
+export default FieldAdminList;
