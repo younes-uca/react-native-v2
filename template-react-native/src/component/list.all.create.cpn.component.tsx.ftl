@@ -7,7 +7,7 @@ import { AxiosResponse } from 'axios';
 
 import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service';
 import  {${pojo.name}Dto}  from '../../../../../../controller/model/${pojo.name}Dto';
-import  {${pojo.name}Card}  from '../../../../../../zynerator/${pojo.name}Card';
+import  {${pojo.name}${role.name?cap_first}Card}  from './${pojo.name}Card';
 
 
 const ${pojo.name}${role.name?cap_first}List: React.FC = () =>  {
@@ -71,7 +71,7 @@ const ${pojo.name}${role.name?cap_first}List: React.FC = () =>  {
         try {
             const ${pojo.name?uncap_first}Response = await ${pojo.name}${role.name?cap_first}Service.findById(id);
             const ${pojo.name?uncap_first}Data = ${pojo.name?uncap_first}Response.data;
-            navigation.navigate('PurchaseDetails', { ${pojo.name?uncap_first}: ${pojo.name?uncap_first}Data });
+            navigation.navigate('${pojo.name?uncap_first}Details', { ${pojo.name?uncap_first}: ${pojo.name?uncap_first}Data });
         } catch (error) {
             console.error('Error fetching ${pojo.formatedName?uncap_first} data:', error);
         }
@@ -84,7 +84,7 @@ return(
 
         <View style={{ marginBottom: 100 }}>
             {${pojo.name?uncap_first}s && p${pojo.name?uncap_first}s.length > 0 ? ( ${pojo.name?uncap_first}s.map((${pojo.name?uncap_first}) => (
-                <${pojo.name}Card key={${pojo.name?uncap_first}.id}
+                <${pojo.name}${role.name?cap_first}Card key={${pojo.name?uncap_first}.id}
                     <#list pojo.fields as field>
                         <#if field.simple && field.id == false>
                     ${pojo.name?uncap_first} = {${pojo.name?uncap_first}.${field.name}}

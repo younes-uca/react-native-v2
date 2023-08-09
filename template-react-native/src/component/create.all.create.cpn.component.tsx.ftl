@@ -172,29 +172,42 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     const handleAdd${field.name?cap_first} = (data: ${field.typeAsPojo.name}Dto) => {
         if (data) {
-            const new${field.typeAsPojo.name}: ${field.typeAsPojo.name}Dto = { price: data.price, quantity: data.quantity, product: selectedProduct, purchase: undefined };
-            set${field.name?cap_first}((prevItems) => [...prevItems, newPurchaseItem]);
-            resetItem({ price: null, quantity: null, });
-            setSelectedProduct({ code: '', reference: 'Select a Product' });
+            const new${field.typeAsPojo.name}: ${field.typeAsPojo.name}Dto = { <#list field.typeAsPojo.fields as innerField><#if innerField.generic && innerField.typeAsPojo.name == pojo.typeAsPojo.name >${innerField.name}: undefined ,<#elseif innerField.generic && innerField.name != pojo.name?uncap_first>${innerField.name}: selected${innerField.name?cap_first} , <#elseif innerField.simple && !innerField.id>${innerField.name}: data.${innerField.name} ,</#if></#list> };
+            set${field.name?cap_first}((prevItems) => [...prevItems, new${field.typeAsPojo.name}]);
+            resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id><#if innerField.large || innerField.pureString>${innerField.name}: '' ,<#elseif innerField.nombre>${innerField.name}: null ,</#if></#if></#list>});
+        <#list field.typeAsPojo.fields as innerField>
+            <#if innerField.generic>
+                setSelected${innerField?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerInnerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerInnerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list>});
+            </#if>
+        </#list>
         }
     };
 
     const handleDelete${field.name?cap_first} = (index) => {
-        const updatedItems = purchaseItems.filter((item, i) => i !== index);
-        setPurchaseItems(updatedItems);
+        const updatedItems = ${field.name}.filter((item, i) => i !== index);
+        set${field.name?cap_first}(updatedItems);
     };
 
-    const handleUpdate${field.name?cap_first} = (data: PurchaseItemDto) => {
+    const handleUpdate${field.name?cap_first} = (data: ${field.typeAsPojo.name?cap_first}Dto) => {
         if (data) {
-            purchaseItems.map((item, i) => {
+            ${field.name}.map((item, i) => {
                 if (i === editIndex${field.name?cap_first}) {
-                item.price = data.price;
-                item.quantity = data.quantity;
-                item.product = selectedProduct;
+                    <#list field.typeAsPojo.fields as innerField>
+                        <#if innerField.generic>
+                    ${innerField.name}: undefined,
+                    item.${innerField.name} = selected${innerField.name?cap_first};
+                        <#elseif innerField.simple && !innerField.id>
+                    item.${innerField.name} = data.${innerField.name};
+                        </#if>
+                    </#list>
                 }
             });
-            resetItem({ price: null, quantity: null, });
-            setSelectedProduct({ code: '', reference: 'Select a Product' });
+            resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id><#if innerField.large || innerField.pureString>${innerField.name}: '' ,<#elseif innerField.nombre>${innerField.name}: null ,</#if></#if></#list>});
+    <#list field.typeAsPojo.fields as innerField>
+        <#if innerField.generic>
+            setSelected${innerField.name?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerInnerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerInnerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list> });
+        </#if>
+    </#list>
             setIsEditMode${field.name?cap_first}(false);
         }
         setIsItemsCollapsed(!isItemsCollapsed);
@@ -202,17 +215,20 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     }
 
     const updateFormDefaultValues${field.name?cap_first} = (index: number) => {
-        let updatedPurchase: PurchaseItemDto;
+        let updated${field.typeAsPojo.name?cap_first}: ${field.typeAsPojo.name?cap_first}Dto;
         setEditIndex${field.name?cap_first}(index);
         setIsEditMode${field.name?cap_first}(true);
-        purchaseItems.map((item, i) => {
+        ${field.name}.map((item, i) => {
             if (i === index) {
-                updatedPurchase = item;
+                updated${field.typeAsPojo.name?cap_first} = item;
             }
         });
-
-    resetItem({ price: updatedPurchase.price, quantity: updatedPurchase.quantity,});
-        setSelectedProduct(updatedPurchase.product);
+        resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id>${innerField.name}: updated${field.typeAsPojo.name?cap_first}.${innerField.name} ,</#if></#list>});
+    <#list field.typeAsPojo.fields as innerField>
+        <#if innerField.generic>
+        setSelected${innerField.name?cap_first}(updated${field.typeAsPojo.name?cap_first}.${innerField.name});
+        </#if>
+    </#list>
         setIsItemsCollapsed(!isItemsCollapsed);
         setIsItemCollapsed(!isItemCollapsed);
     };
@@ -221,17 +237,31 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
 
     const handleSave = async (item: ${pojo.name}Dto) => {
-        item.client = selectedClient;
-        item.purchaseItems = purchaseItems;
+    <#list pojo.fields as field>
+        <#if field.list && !field.association>
+        item.${field.name} = ${field.name};
+        <#elseIf field.generic>
+        item.${field.name} = selected${field.name?cap_first};
+        </#if>
+    </#list>
         Keyboard.dismiss();
         try {
             await ${pojo.name}${role.name?cap_first}Service.save( item );
             setIsItemsCollapsed(!isItemsCollapsed);
             reset();
-            setSelectedClient({ id: null, fullName: 'Select a Client', email: '' });
+    <#list pojo.fields as field>
+        <#if field.generic>
+            setSelected{field.name?cap_first}({ <#list field.typeAsPojo.fields as innerField><#if innerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>${innerField.name} : 'select a ${innerField.formatedName}',<#elseif innerField.dateTime>${innerField.name} : undefined ,<#elseif innerField.pureString || innerField.large>${innerField.name} : '' ,<#elseif innerField.simple >${innerField.name} : null ,</#if></#list>});
+        </#if>
+    </#list>
             setShowSavedModal(true);
             setTimeout(() => setShowSavedModal(false), 1500);
-            setPurchaseItems([]);
+    <#list pojo.fields as field>
+        <#if field.list && !field.association>
+            item.${field.name} = ${field.name};
+            set${field.name?cap_first}([]);
+        </#if>
+    </#list>
         } catch (error) {
             console.error('Error saving ${pojo.name?uncap_first}:', error);
             setShowErrorModal(true);
@@ -303,10 +333,10 @@ return(
             </Collapsible>
 
             <TouchableOpacity onPress={itemsCollapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
-                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>List Purchase Item</Text>
+                <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>List ${field.formatedName}</Text>
             </TouchableOpacity>
             <Collapsible collapsed={isItemsCollapsed}>
-                { purchaseItems && purchaseItems.length > 0 ? ( purchaseItems.map((item, index) => (
+                { ${field.name} && ${field.name}.length > 0 ? ( ${field.name}.map((item, index) => (
                     <View key={index} style={styles.itemCard}>
                         <View>
                              <#list field.typeAsPojo.fields as innerField>
