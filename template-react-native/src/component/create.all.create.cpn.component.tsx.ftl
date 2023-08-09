@@ -50,6 +50,12 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     const [${field.name?uncap_first}, set${field.name?cap_first}] = useState<${field.typeAsPojo.name}Dto>(new ${field.typeAsPojo.name}Dto());
     const [isEditMode${field.name?cap_first}, setIsEditMode${field.name?cap_first}] = useState(false);
     const [editIndex${field.name?cap_first}, setEditIndex${field.name?cap_first}] = useState(null);
+
+    const [${field.name}Collapsible, set${field.name?cap_first}Collapsible] = useState(false);
+    const [is${field.name?cap_first}Collapsed, setIs${field.name?cap_first}Collapsed] = useState(false);
+    const [is${field.name?cap_first}, setIs${field.name?cap_first}] = useState(false);
+    const [isEdit${field.name?cap_first}Mode, setIsEdit${field.name?cap_first}Mode] = useState(false);
+
         <#elseif field.list && field.association>
     const [${field.name?uncap_first}, set${field.name?cap_first}] = useState<${field.typeAsPojo.name}Dto[]>(new Array<${field.typeAsPojo.name}Dto>());
             </#if>
@@ -154,14 +160,18 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     });
 
     const ${field.name}ItemCollapsible = () => {
+        // TODO: setIsItemCollapsed must be changed to field.setIsItemsCollapsed
         setIsItemCollapsed(!isItemCollapsed);
         setIs${pojo.name}Collapsed(true);
+        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
         setIsItemsCollapsed(true);
     };
 
     const ${field.name}ItemsCollapsible = () => {
+        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
         setIsItemsCollapsed(!isItemsCollapsed);
         setIs${pojo.name}Collapsed(true);
+        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
         setIsItemCollapsed(true);
     };
 
@@ -302,7 +312,7 @@ return(
 
             <Collapsible collapsed={is${field.name?cap_first}Collapsed}>
                 <#list field.typeAsPojo.fields as innerField>
-                    <#if innerField.generic>
+                    <#if innerField.generic && innerField.typeAsPojo.name != pojo.name>
                 <TouchableOpacity onPress={() => set${innerField.name?cap_first}ModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Text>{selected${innerField.name?cap_first}.${innerField.typeAsPojo.labelOrReferenceOrId.name}}</Text>
@@ -327,10 +337,11 @@ return(
                 </TouchableOpacity>
 
             </Collapsible>
-
+            // TODO: itemsCollapsible must be changed to field.namesCollapsible
             <TouchableOpacity onPress={itemsCollapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>List ${field.formatedName}</Text>
             </TouchableOpacity>
+                // TODO: isItemsCollapsed must be changed to field.isItemsCollapsed
             <Collapsible collapsed={isItemsCollapsed}>
                 { ${field.name} && ${field.name}.length > 0 ? ( ${field.name}.map((item, index) => (
                     <View key={index} style={styles.itemCard}>
@@ -338,7 +349,7 @@ return(
                              <#list field.typeAsPojo.fields as innerField>
                                  <#if innerField.simple && !innerField.id>
                             <Text style={styles.infos}>'${innerField.formatedName}: {item.${innerField.name}}</Text>
-                                 <#elseif innerField.generic>
+                                 <#elseif innerField.generic && innerField.typeAsPojo != pojo.name>
                             <Text style={styles.infos}>'${innerField.formatedName}: {item.${innerField.name}.${innerField.typeAsPojo.labelOrReferenceOrId.name}}</Text>
                                  </#if>
                             </#list>
