@@ -33,21 +33,17 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
     const [${fieldGeneric.name}s, set${fieldGeneric.name?cap_first}s] = useState<${fieldGeneric.typeAsPojo.name}Dto[]>([]);
     const [${fieldGeneric.name}ModalVisible, set${fieldGeneric.name?cap_first}ModalVisible] = useState(false);
-    const [selected${fieldGeneric.name?cap_first}, setSelected${fieldGeneric.name?cap_first}] = useState<${fieldGeneric.name?cap_first}Dto>(
-    {
-    <#list fieldGeneric.typeAsPojo.fields as innerField>
-            <#if innerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>
-                ${innerField.name} : 'select a ${innerField.formatedName}',
-            <#elseif innerField.dateTime>
-                ${innerField.name} : undefined ,
-            <#elseif innerField.pureString || innerField.large>
-                ${innerField.name} : '' ,
-            <#elseif innerField.simple >
-                ${innerField.name} : null ,
-            </#if>
-    </#list> });
+    const [selected${fieldGeneric.name?cap_first}, setSelected${fieldGeneric.name?cap_first}] = useState<${fieldGeneric.name?cap_first}Dto>({<#list fieldGeneric.typeAsPojo.fields as innerField><#if innerField.name == fieldGeneric.typeAsPojo.labelOrReferenceOrId.name>${innerField.name} : 'select a ${fieldGeneric.formatedName}',<#elseif innerField.dateTime>${innerField.name} : undefined ,<#elseif innerField.pureString || innerField.large>${innerField.name} : '' ,<#elseif innerField.simple >${innerField.name} : null ,</#if></#list> });
 
     </#list>
+
+    <#if  pojo.dependencies??>
+        <#list pojo.dependencies as dependency>
+            <#if dependency?? && dependency.name??>
+    const ${dependency.name?uncap_first}${role.name?cap_first}Service = new ${dependency.name}${role.name?cap_first}Service();
+            </#if>
+        </#list>
+    </#if>
 
       <#list pojo.fields as field>
         <#if field.list && !field.association>
@@ -172,12 +168,12 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     const handleAdd${field.name?cap_first} = (data: ${field.typeAsPojo.name}Dto) => {
         if (data) {
-            const new${field.typeAsPojo.name}: ${field.typeAsPojo.name}Dto = { <#list field.typeAsPojo.fields as innerField><#if innerField.generic && innerField.typeAsPojo.name == pojo.typeAsPojo.name >${innerField.name}: undefined ,<#elseif innerField.generic && innerField.name != pojo.name?uncap_first>${innerField.name}: selected${innerField.name?cap_first} , <#elseif innerField.simple && !innerField.id>${innerField.name}: data.${innerField.name} ,</#if></#list> };
+            const new${field.typeAsPojo.name}: ${field.typeAsPojo.name}Dto = { <#list field.typeAsPojo.fields as innerField><#if innerField.generic && innerField.typeAsPojo.name == pojo.name >${innerField.name}: undefined ,<#elseif innerField.generic && innerField.name != pojo.name?uncap_first>${innerField.name}: selected${innerField.name?cap_first} , <#elseif innerField.simple && !innerField.id>${innerField.name}: data.${innerField.name} ,</#if></#list> };
             set${field.name?cap_first}((prevItems) => [...prevItems, new${field.typeAsPojo.name}]);
             resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id><#if innerField.large || innerField.pureString>${innerField.name}: '' ,<#elseif innerField.nombre>${innerField.name}: null ,</#if></#if></#list>});
         <#list field.typeAsPojo.fields as innerField>
-            <#if innerField.generic>
-                setSelected${innerField?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerInnerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerInnerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list>});
+            <#if innerField.generic && innerField.typeAsPojo.name != pojo.name>
+                setSelected${innerField.name?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list>});
             </#if>
         </#list>
         }
@@ -193,8 +189,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
             ${field.name}.map((item, i) => {
                 if (i === editIndex${field.name?cap_first}) {
                     <#list field.typeAsPojo.fields as innerField>
-                        <#if innerField.generic>
-                    ${innerField.name}: undefined,
+                        <#if innerField.generic && innerField.typeAsPojo.name != pojo.name>
+                    ${innerField.name}: undefined ;
                     item.${innerField.name} = selected${innerField.name?cap_first};
                         <#elseif innerField.simple && !innerField.id>
                     item.${innerField.name} = data.${innerField.name};
@@ -204,8 +200,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
             });
             resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id><#if innerField.large || innerField.pureString>${innerField.name}: '' ,<#elseif innerField.nombre>${innerField.name}: null ,</#if></#if></#list>});
     <#list field.typeAsPojo.fields as innerField>
-        <#if innerField.generic>
-            setSelected${innerField.name?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerInnerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerInnerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list> });
+        <#if innerField.generic && innerField.typeAsPojo.name != pojo.name>
+            setSelected${innerField.name?cap_first}({<#list innerField.typeAsPojo.fields as innerInnerField><#if innerInnerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>${innerInnerField.name} : 'select a ${innerField.formatedName}',<#elseif innerInnerField.dateTime>${innerInnerField.name} : undefined ,<#elseif innerInnerField.pureString || innerInnerField.large>${innerInnerField.name} : '' ,<#elseif innerInnerField.simple >${innerInnerField.name} : null ,</#if></#list> });
         </#if>
     </#list>
             setIsEditMode${field.name?cap_first}(false);
@@ -225,7 +221,7 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         });
         resetItem({<#list field.typeAsPojo.fields as innerField><#if innerField.simple && !innerField.id>${innerField.name}: updated${field.typeAsPojo.name?cap_first}.${innerField.name} ,</#if></#list>});
     <#list field.typeAsPojo.fields as innerField>
-        <#if innerField.generic>
+        <#if innerField.generic  && innerField.typeAsPojo.name != pojo.name>
         setSelected${innerField.name?cap_first}(updated${field.typeAsPojo.name?cap_first}.${innerField.name});
         </#if>
     </#list>
@@ -240,7 +236,7 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     <#list pojo.fields as field>
         <#if field.list && !field.association>
         item.${field.name} = ${field.name};
-        <#elseIf field.generic>
+        <#elseif field.generic>
         item.${field.name} = selected${field.name?cap_first};
         </#if>
     </#list>
@@ -251,7 +247,7 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
             reset();
     <#list pojo.fields as field>
         <#if field.generic>
-            setSelected{field.name?cap_first}({ <#list field.typeAsPojo.fields as innerField><#if innerField.name == innerField.typeAsPojo.labelOrReferenceOrId.name>${innerField.name} : 'select a ${innerField.formatedName}',<#elseif innerField.dateTime>${innerField.name} : undefined ,<#elseif innerField.pureString || innerField.large>${innerField.name} : '' ,<#elseif innerField.simple >${innerField.name} : null ,</#if></#list>});
+            setSelected${field.name?cap_first}({ <#list field.typeAsPojo.fields as innerField><#if innerField.name == field.typeAsPojo.labelOrReferenceOrId.name>${innerField.name} : 'select a ${field.formatedName}',<#elseif innerField.dateTime>${innerField.name} : undefined ,<#elseif innerField.pureString || innerField.large>${innerField.name} : '' ,<#elseif innerField.simple >${innerField.name} : null ,</#if></#list>});
         </#if>
     </#list>
             setShowSavedModal(true);
@@ -288,7 +284,7 @@ return(
                         <#elseif field.nombre == false>
                             <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} keyboardT="numeric" />
                         </#if>
-                    <#elseif field.generic && !field.notVisibleInCreatePage>
+                    <#elseif field.generic && !field.notVisibleInCreatePage && field.typeAsPojo.name != pojo.name>
                         <TouchableOpacity onPress={() => set${field.name?cap_first}ModalVisible(true)} style={styles.placeHolder} >
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text>{selected${field.name?cap_first}.<#if field.typeAsPojo??>${field.typeAsPojo.labelOrReferenceOrId.name}<#else>${field.name}</#if>}</Text>
@@ -304,12 +300,12 @@ return(
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add ${field.formatedName}</Text>
             </TouchableOpacity>
 
-            <Collapsible collapsed={is${field.name}Collapsed}>
+            <Collapsible collapsed={is${field.name?cap_first}Collapsed}>
                 <#list field.typeAsPojo.fields as innerField>
                     <#if innerField.generic>
-                <TouchableOpacity onPress={() => set${innerField.name}ModalVisible(true)} style={styles.placeHolder} >
+                <TouchableOpacity onPress={() => set${innerField.name?cap_first}ModalVisible(true)} style={styles.placeHolder} >
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text>{selected${innerField.name}.${innerField.typeAsPojo.labelOrReferenceOrId.name}}</Text>
+                        <Text>{selected${innerField.name?cap_first}.${innerField.typeAsPojo.labelOrReferenceOrId.name}}</Text>
                         <Ionicons name="caret-down-outline" size={22} color={'black'} />
                     </View>
                 </TouchableOpacity>
@@ -351,7 +347,7 @@ return(
                             <TouchableOpacity onPress={() => handleDelete${field.name?cap_first}(index)}>
                                 <Ionicons name="trash-outline" size={22} color={'red'} />
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => updateFormDefaultValues(index)}>
+                            <TouchableOpacity onPress={() => updateFormDefaultValues${field.name?cap_first}(index)}>
                                 <Ionicons name="pencil-outline" size={22} color={'blue'} />
                             </TouchableOpacity>
                         </View>
