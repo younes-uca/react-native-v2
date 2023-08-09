@@ -89,7 +89,7 @@ return(
                         <#if field.simple && field.id == false>
                     ${pojo.name?uncap_first} = {${pojo.name?uncap_first}.${field.name}}
                         <#elseif field.generic && !field.notVisibleInCreatePage>
-                    ${pojo.name?uncap_first} = {${pojo.name?uncap_first}.<#if field.typeAsPojo??>${field.typeAsPojo.labelOrReferenceOrId.name}<#else>${field.name}</#if>}
+                    ${pojo.name?uncap_first}Name = {${pojo.name?uncap_first}.<#if field.typeAsPojo??>${field.typeAsPojo.labelOrReferenceOrId.name}<#else>${field.name}</#if>}
                         </#if>
                     </#list>
                     onPressDelete={() => handleDeletePress(${pojo.name?uncap_first}.id)}
