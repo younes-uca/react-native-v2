@@ -284,7 +284,9 @@ return(
                         <#if  field.large>
                             <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} keyboardT="default" />
                         <#elseif field.pureString>
-                            <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} keyboardT="default" />
+                            <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} isTextArea={true}  keyboardT="default" />
+                         <#elseif field.bool>
+                            <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} isBoolean={true}  keyboardT="default" />
                         <#elseif field.nombre == false>
                             <CustomInput control={control} name={'${field.name}'} placeholder={'${field.formatedName?cap_first}'} keyboardT="numeric" />
                         </#if>
