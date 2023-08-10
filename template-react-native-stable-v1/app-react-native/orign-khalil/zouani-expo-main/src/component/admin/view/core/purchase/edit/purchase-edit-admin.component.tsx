@@ -1,10 +1,6 @@
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Keyboard } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { RouteProp } from '@react-navigation/native';
-import { PurchaseDto } from '../../../../../../controller/model/PurchaseDto';
-import ClientAdminService from '../../../../../../controller/service/admin/ClientAdminService';
-import PurchaseAdminService from '../../../../../../controller/service/admin/PurchaseAdminService';
-import { ClientDto } from '../../../../../../controller/model/ClientDto';
 import { useForm } from 'react-hook-form';
 import CustomInput from '../../../../../../zynerator/CustomInput';
 import CustomButton from '../../../../../../zynerator/CustomButton';
@@ -14,6 +10,12 @@ import { AxiosResponse } from 'axios';
 import SaveFeedbackModal from '../../../../../../zynerator/SaveFeedbackModal';
 import FilterModal from '../../../../../../zynerator/FilterModal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+
+import { PurchaseDto } from '../../../../../../controller/model/PurchaseDto';
+import ClientAdminService from '../../../../../../controller/service/admin/ClientAdminService';
+import PurchaseAdminService from '../../../../../../controller/service/admin/PurchaseAdminService';
+import { ClientDto } from '../../../../../../controller/model/ClientDto';
 
 
 type PurchaseUpdateScreenRouteProp = RouteProp<{ PurchaseUpdate: { purchase: PurchaseDto } }, 'PurchaseUpdate'>;
@@ -26,11 +28,11 @@ type Props = {
 const PurchaseAdminEdit: React.FC<Props> = ({ route }) => {
 
     const navigation = useNavigation<NavigationProp<any>>();
-    type ClientResponse = AxiosResponse<ClientDto[]>;
+    const [showErrorModal, setShowErrorModal] = useState(false);
     const { purchase } = route.params;
+    type ClientResponse = AxiosResponse<ClientDto[]>;
 
     const [clients, setClients] = useState<ClientDto[]>([]);
-    const [showErrorModal, setShowErrorModal] = useState(false);
     const [clientModalVisible, setCLientModalVisible] = useState(false);
     const [selectedClient, setSelectedClient] = useState<ClientDto>({
         id: purchase.client.id,
@@ -56,7 +58,7 @@ const PurchaseAdminEdit: React.FC<Props> = ({ route }) => {
         setCLientModalVisible(false);
     };
 
-    const handleCloseModal = () => {
+    const handleCloseCLientModal = () => {
         setCLientModalVisible(false);
     };
 
@@ -145,12 +147,12 @@ const PurchaseAdminEdit: React.FC<Props> = ({ route }) => {
                 placeholder={"Select a Client"}
                 onItemSelect={onClientSelect}
                 items={clients}
-                onClose={handleCloseModal}
+                onClose={handleCloseCLientModal}
                 variable={'fullName'}
             />
 
         </SafeAreaView>
-    )
+    );
 };
 
 const styles = StyleSheet.create({

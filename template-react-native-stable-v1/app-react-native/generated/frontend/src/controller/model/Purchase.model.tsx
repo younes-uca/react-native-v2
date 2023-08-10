@@ -12,6 +12,7 @@ export class PurchaseDto extends BaseDto{
     public image: string;
 
     public total: null | number;
+    public isActive: boolean;
 
     public description: string;
 
@@ -26,8 +27,10 @@ export class PurchaseDto extends BaseDto{
         this.image = '';
         this.total = null;
         this.description = '';
+        this.isActive = false;
         this.client = new ClientDto() ;
         this.purchaseItems = new Array<PurchaseItemDto>();
         }
 
 }
+

@@ -51,9 +51,6 @@ public class Purchase   extends AuditBusinessObject     {
         this.reference = reference ;
     }
 
-
-
-
     @Id
     @Column(name = "id")
         @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="purchase_seq")

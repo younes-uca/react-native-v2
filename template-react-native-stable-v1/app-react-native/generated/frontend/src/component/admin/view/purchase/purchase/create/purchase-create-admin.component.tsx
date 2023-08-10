@@ -1,4 +1,9 @@
 import { View, Text, StyleSheet, SafeAreaView, Keyboard, TouchableOpacity } from 'react-native';
+import { Switch } from 'react-native';
+import { Controller } from 'react-hook-form';
+import DatePicker from 'react-native-datepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import CustomInput from '../../../../../../zynerator/CustomInput';
@@ -61,6 +66,8 @@ const PurchaseAdminCreate = () => {
         total: null,
         description: '' ,
         client: undefined,
+        isActive: false,
+        purchaseDate: null,
         },
     });
 
@@ -179,6 +186,7 @@ const PurchaseAdminCreate = () => {
         }
     };
 
+
 return(
     <SafeAreaView style={{ flex: 1, backgroundColor: '#e6e8fa' }} >
         <ScrollView style={{ margin: 20, marginBottom: 80 }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" >
@@ -192,10 +200,32 @@ return(
                             <CustomInput control={control} name={'reference'} placeholder={'Reference'} keyboardT="default" />
 {/*
                             <CustomInput control={control} name={'purchaseDate'} placeholder={'Purchase date'} keyboardT="numeric" />
+
 */}
+
+
+
+                <CustomInput control={control} name={'isActive'} placeholder={'Is Active'} isBoolean={true}  keyboardT="default" />
+                <CustomInput control={control} name={'purchaseDate'} placeholder={'Purchase Date'} isDate={true}  keyboardT="default"  />
+                <CustomInput control={control} name={'description'} placeholder={'Description'} isTextArea={true} keyboardT="default" />
+
+
+
+
+               {/* <View style={styles.inputContainer}>
+                    <Text style={styles.inputLabel}>Active</Text>
+                    <Controller control={control} name={'isActive'}
+                        render={({ field: { onChange, value } }) => (
+                            <Switch value={value} onValueChange={newValue => onChange(newValue)} />
+                        )}
+                    />
+                </View>*/}
+
                             <CustomInput control={control} name={'total'} placeholder={'Total'} keyboardT="default" />
                             <CustomInput control={control} name={'image'} placeholder={'Image'} keyboardT="default" />
-                            <CustomInput control={control} name={'description'} placeholder={'Description'} keyboardT="default" />
+{/*
+                            <CustomInput control={control} name={'description'} placeholder={'Description'}   keyboardT="default" />
+*/}
                         <TouchableOpacity onPress={() => setClientModalVisible(true)} style={styles.placeHolder} >
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text>{selectedClient.fullName}</Text>
@@ -334,7 +364,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         padding: 15,
         marginTop: 15,
-    }
+    },
+
+
+
+
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 10,
+    },
+
+    inputLabel: {
+        marginRight: 10,
+        backgroundColor: '#f5f5f5',
+        width: '10%',
+        borderColor: '#e8e8e8',
+        borderWidth: 1,
+        borderRadius: 7,
+        paddingHorizontal: 15,
+        padding: 15,
+        marginTop: 15,
+    },
+
 });
 
 export default PurchaseAdminCreate;

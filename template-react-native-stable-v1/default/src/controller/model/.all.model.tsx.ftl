@@ -42,7 +42,7 @@ export class ${pojo.name}Dto extends BaseDto{
     <#list pojo.fieldsSimple as fieldSimple>
         <#if fieldSimple.id == false>
             <#if fieldSimple.name == pojo.labelOrReferenceOrId.name>
-        this.${fieldSimple.name?uncap_first} = 'select a ${fieldSimple.name?uncap_first}';
+        this.${fieldSimple.name?uncap_first} = 'select a ${pojo.name?uncap_first}';
             <#elseif fieldSimple.pureString>
         this.${fieldSimple.name?uncap_first} = '';
             </#if>

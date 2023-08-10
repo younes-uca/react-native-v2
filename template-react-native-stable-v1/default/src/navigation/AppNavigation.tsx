@@ -5,9 +5,11 @@ import AboutScreen from '../component/AboutScreen';
 import CustomDrawer from '../zynerator/CustomDrawer/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import PurchaseAdmin from "../component/admin/view/purchase/purchase/container/purchase-container-admin.component";
-import PurchaseAdminList from "../component/admin/view/purchase/purchase/list/purchase-list-admin.component";
-import PurchaseAdminCreate from "../component/admin/view/purchase/purchase/create/purchase-create-admin.component";
+import PurchaseAdminView from '../component/admin/view/core/purchase/view/PurchaseAdminView';
+import PurchaseAdminList from '../component/admin/view/core/purchase/list/purchase-list-admin.component';
+import PurchaseAdminCreate from '../component/admin/view/core/purchase/create/purchase-create-admin.component';
+import Purchase from '../component/admin/view/core/purchase/Purchase';
+import PurchaseAdminEdit from '../component/admin/view/core/purchase/edit/purchase-edit-admin.component';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -38,29 +40,23 @@ function DrawerNavigation() {
                 }}
             />
 
-            <Drawer.Screen
-                name="Purchase"
-                component={PurchaseAdmin}
-                options={{
-                    drawerIcon: ({ color }) => (
-                        <Ionicons name="cart-outline" size={22} color={color} />
-                    ),
-                }}
-            />
+            <#list role.menuRoles as menuRole>
+            <Drawer.Screen name="${menuRole.menu.pojo.name}" component={${menuRole.menu.pojo.name}}  options={{ drawerIcon: ({ color }) => ( <Ionicons name="cart-outline" size={22} color={color} /> ), }}/>
+        </#list>
 
-            <Drawer.Screen
-                name="About"
-                component={AboutScreen}
-                options={{
-                    drawerIcon: ({ color }) => (
-                        <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
-                    ),
-                }}
-            />
+    <Drawer.Screen
+        name="About"
+        component={AboutScreen}
+        options={{
+            drawerIcon: ({ color }) => (
+                <Ionicons name="chatbox-ellipses-outline" size={22} color={color} />
+            ),
+        }}
+    />
 
-        </Drawer.Navigator>
+</Drawer.Navigator>
 
-    );
+);
 }
 
 function AppNavigation() {
@@ -74,24 +70,36 @@ function AppNavigation() {
                 />
 
 
+                <#list role.menuRoles as menuRole>
+
+                {/*     <Stack.Screen
+          name="${menuRole.menu.pojo.name}Details"
+          component={${menuRole.menu.pojo.name}AdminView}
+          options={({  }) => ({ headerTitle: '${menuRole.menu.pojo.name}Details'  })}
+      />*/}
+
                 <Stack.Screen
-                    name="PurchaseList"
+                    name="${menuRole.menu.pojo.name}List"
                     component={PurchaseAdminList}
-                    options={{ title: 'PurchaseList' }}
+                    options={{ title: '${menuRole.menu.pojo.name}List' }}
                 />
 
                 <Stack.Screen
-                    name="PurchaseCreate"
+                    name="${menuRole.menu.pojo.name}Create"
                     component={PurchaseAdminCreate}
-                    options={{ title: 'PurchaseCreate' }}
+                    options={{ title: '${menuRole.menu.pojo.name}Create' }}
                 />
 
+                <Stack.Screen
+                    name="${menuRole.menu.pojo.name}Update"
+                    component={${menuRole.menu.pojo.name}AdminEdit}
+                />
+            </#list>
 
 
-
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+        </Stack.Navigator>
+</NavigationContainer>
+);
 }
 
 export default AppNavigation;
