@@ -10,14 +10,14 @@ import Collapsible from 'react-native-collapsible';
 import FilterModal from '../../../../../../zynerator/FilterModal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service';
-import  {${pojo.name?cap_first}Dto}  from '../../../../../../controller/model/${pojo.name?cap_first}Dto';
+import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service.service';
+import  {${pojo.name?cap_first}Dto}  from '../../../../../../controller/model/${pojo.name?cap_first}.model';
 
 <#if pojo.dependencies??>
     <#list pojo.dependencies as dependency>
         <#if dependency?? && dependency.name??>
-import {${dependency.name?cap_first}Dto} from '../../../../../../controller/model/${dependency.name?cap_first}Dto';
-import {${dependency.name?cap_first}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${dependency.name?cap_first}${role.name?cap_first}Service';
+import {${dependency.name?cap_first}Dto} from '../../../../../../controller/model/${dependency.name?cap_first}.model';
+import {${dependency.name?cap_first}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${dependency.name?cap_first}${role.name?cap_first}Service.service';
         </#if>
     </#list>
 </#if>
@@ -27,8 +27,6 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     const [showSavedModal, setShowSavedModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
     const [is${pojo.name}Collapsed, setIs${pojo.name}Collapsed] = useState(true);
-    const [isItemCollapsed, setIsItemCollapsed] = useState(true);
-    const [isItemsCollapsed, setIsItemsCollapsed] = useState(true);
 
     <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
     const [${fieldGeneric.name}s, set${fieldGeneric.name?cap_first}s] = useState<${fieldGeneric.typeAsPojo.name}Dto[]>([]);
@@ -51,8 +49,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     const [isEditMode${field.name?cap_first}, setIsEditMode${field.name?cap_first}] = useState(false);
     const [editIndex${field.name?cap_first}, setEditIndex${field.name?cap_first}] = useState(null);
 
-    const [${field.name}Collapsible, set${field.name?cap_first}Collapsible] = useState(false);
-    const [is${field.name?cap_first}Collapsed, setIs${field.name?cap_first}Collapsed] = useState(false);
+    const [is${field.name?cap_first}ItemCollapsed, setIs${field.name?cap_first}ItemCollapsed] = useState(false);
+    const [is${field.name?cap_first}ItemsCollapsed, setIs${field.name?cap_first}ItemsCollapsed] = useState(false);
     const [is${field.name?cap_first}, setIs${field.name?cap_first}] = useState(false);
     const [isEdit${field.name?cap_first}Mode, setIsEdit${field.name?cap_first}Mode] = useState(false);
 
@@ -81,8 +79,12 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
 
     const ${pojo.name?uncap_first}Collapsible = () => {
         setIs${pojo.name}Collapsed(!is${pojo.name}Collapsed);
-        setIsItemCollapsed(true);
-        setIsItemsCollapsed(true);
+<#list pojo.fields as field>
+    <#if field.list && !field.association>
+        setIs${field.name?cap_first}ItemCollapsed(true);
+        setIs${field.name?cap_first}ItemsCollapsed(true);
+    </#if>
+</#list>
     };
 
     <#list pojo.fieldsGenericIncludingInnerTypeInListField as fieldGeneric>
@@ -160,19 +162,15 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     });
 
     const ${field.name}ItemCollapsible = () => {
-        // TODO: setIsItemCollapsed must be changed to field.setIsItemsCollapsed
-        setIsItemCollapsed(!isItemCollapsed);
+        setIs${field.name?cap_first}ItemCollapsed(!is${field.name?cap_first}ItemCollapsed);
         setIs${pojo.name}Collapsed(true);
-        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
-        setIsItemsCollapsed(true);
+        setIs${field.name?cap_first}ItemsCollapsed(true);
     };
 
     const ${field.name}ItemsCollapsible = () => {
-        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
-        setIsItemsCollapsed(!isItemsCollapsed);
+        setIs${field.name?cap_first}ItemsCollapsed(!is${field.name?cap_first}ItemsCollapsed);
         setIs${pojo.name}Collapsed(true);
-        // TODO: setIsItemsCollapsed must be changed to field.setIsItemsCollapsed
-        setIsItemCollapsed(true);
+        setIs${field.name?cap_first}ItemCollapsed(true);
     };
 
 
@@ -216,8 +214,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
     </#list>
             setIsEditMode${field.name?cap_first}(false);
         }
-        setIsItemsCollapsed(!isItemsCollapsed);
-        setIsItemCollapsed(!isItemCollapsed);
+        setIsI${field.name?cap_first}ItemsCollapsed(!is${field.name?cap_first}ItemsCollapsed);
+        setIs${field.name?cap_first}ItemCollapsed(!is${field.name?cap_first}ItemCollapsed);
     }
 
     const updateFormDefaultValues${field.name?cap_first} = (index: number) => {
@@ -235,8 +233,8 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         setSelected${innerField.name?cap_first}(updated${field.typeAsPojo.name?cap_first}.${innerField.name});
         </#if>
     </#list>
-        setIsItemsCollapsed(!isItemsCollapsed);
-        setIsItemCollapsed(!isItemCollapsed);
+        setIs${field.name?cap_first}ItemsCollapsed(!is${field.name?cap_first}ItemsCollapsed);
+        setIs${field.name?cap_first}ItemCollapsed(!is${field.name?cap_first}ItemCollapsed);
     };
         </#if>
     </#list>
@@ -253,7 +251,11 @@ const ${pojo.name}${role.name?cap_first}Create = () => {
         Keyboard.dismiss();
         try {
             await ${pojo.name}${role.name?cap_first}Service.save( item );
-            setIsItemsCollapsed(!isItemsCollapsed);
+    <#list pojo.fields as field>
+        <#if field.list && !field.association>
+            setIs${field.name?cap_first}ItemsCollapsed(!is${field.name?cap_first}ItemsCollapsed);
+        </#if>
+    </#list>
             reset();
     <#list pojo.fields as field>
         <#if field.generic>
@@ -306,7 +308,7 @@ return(
             </Collapsible>
             <#list pojo.fields as field>
             <#if  field.list && !field.association>
-            <TouchableOpacity onPress={${field.name}Collapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
+            <TouchableOpacity onPress={${field.name}ItemCollapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>Add ${field.formatedName}</Text>
             </TouchableOpacity>
 
@@ -337,12 +339,10 @@ return(
                 </TouchableOpacity>
 
             </Collapsible>
-            // TODO: itemsCollapsible must be changed to field.namesCollapsible
-            <TouchableOpacity onPress={itemsCollapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
+            <TouchableOpacity onPress={${field.name}ItemsCollapsible} style={{ backgroundColor: '#ffd700', padding: 10, borderRadius: 10, marginVertical: 5 }}>
                 <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}>List ${field.formatedName}</Text>
             </TouchableOpacity>
-                // TODO: isItemsCollapsed must be changed to field.isItemsCollapsed
-            <Collapsible collapsed={isItemsCollapsed}>
+            <Collapsible collapsed={is${field.name?cap_first}ItemsCollapsed}>
                 { ${field.name} && ${field.name}.length > 0 ? ( ${field.name}.map((item, index) => (
                     <View key={index} style={styles.itemCard}>
                         <View>

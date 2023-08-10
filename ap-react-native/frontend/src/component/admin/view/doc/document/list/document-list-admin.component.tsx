@@ -5,9 +5,9 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import ConfirmDeleteModal from '../../../../../../zynerator/ConfirmDeleteModal';
 import { AxiosResponse } from 'axios';
 
-import {DocumentAdminService} from '../../../../../../controller/service/admin/DocumentAdminService';
-import  {DocumentDto}  from '../../../../../../controller/model/DocumentDto';
-import  {DocumentAdminCard}  from './DocumentCard';
+import {DocumentAdminService} from '../../../../../../controller/service/admin/DocumentAdminService.service';
+import  {DocumentDto}  from '../../../../../../controller/model/Document.model';
+import DocumentAdminCard from "../card/document-card-admin.component";
 
 
 const DocumentAdminList: React.FC = () =>  {

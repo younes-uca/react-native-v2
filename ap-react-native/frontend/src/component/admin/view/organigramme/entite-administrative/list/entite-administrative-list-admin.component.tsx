@@ -5,9 +5,9 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import ConfirmDeleteModal from '../../../../../../zynerator/ConfirmDeleteModal';
 import { AxiosResponse } from 'axios';
 
-import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService';
-import  {EntiteAdministrativeDto}  from '../../../../../../controller/model/EntiteAdministrativeDto';
-import  {EntiteAdministrativeAdminCard}  from './EntiteAdministrativeCard';
+import {EntiteAdministrativeAdminService} from '../../../../../../controller/service/admin/EntiteAdministrativeAdminService.service';
+import  {EntiteAdministrativeDto}  from '../../../../../../controller/model/EntiteAdministrative.model';
+import EntiteAdministrativeAdminCard from "../card/entite-administrative-card-admin.component";
 
 
 const EntiteAdministrativeAdminList: React.FC = () =>  {

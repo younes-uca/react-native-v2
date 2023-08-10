@@ -5,9 +5,9 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import ConfirmDeleteModal from '../../../../../../zynerator/ConfirmDeleteModal';
 import { AxiosResponse } from 'axios';
 
-import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service';
-import  {${pojo.name}Dto}  from '../../../../../../controller/model/${pojo.name}Dto';
-import  {${pojo.name}${role.name?cap_first}Card}  from './${pojo.name}Card';
+import {${pojo.name}${role.name?cap_first}Service} from '../../../../../../controller/service/${role.name}/${pojo.name}${role.name?cap_first}Service.service';
+import  {${pojo.name}Dto}  from '../../../../../../controller/model/${pojo.name}.model';
+import  {${pojo.name}${role.name?cap_first}Card}  from '../card/${pojo.formatedUrl}-card-${role.name}.component';
 
 
 const ${pojo.name}${role.name?cap_first}List: React.FC = () =>  {
