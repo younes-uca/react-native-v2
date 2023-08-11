@@ -77,7 +77,7 @@ function AppNavigation() {
                 <Stack.Screen
                     name="PurchaseDetails"
                     component={PurchaseAdminView}
-                    options={({ /route/ }) => ({ headerTitle: 'PurchaseDetails' /route.params.Ditem.title/ })}
+                    options={({}) => ({ headerTitle: 'PurchaseDetails'  })}
                 />
 
                 <Stack.Screen
